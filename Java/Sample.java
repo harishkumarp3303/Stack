@@ -1,0 +1,7 @@
+/**
+ * sample
+ */
+public class sample {
+    
+    
+}
