@@ -1,7 +1,0 @@
-/**
- * sample
- */
-public class sample {
-    
-    
-}
