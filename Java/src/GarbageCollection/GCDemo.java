@@ -30,11 +30,14 @@ public class GCDemo {
 
     @Override
     protected void finalize() throws Throwable { // Method Belongs to GC Demo class
-        System.out.println("Object is garbage collected"); 
+        System.out.println("Object is garbage collected---------"+hashCode()); 
     };
     }
 
 // Output
 
 // End of main
-// Object is garbage collected
+// Object is garbage collected---------684728244
+// Object is garbage collected---------639104222
+// Object is garbage collected---------573076676
+// Object is garbage collected---------1730871013
