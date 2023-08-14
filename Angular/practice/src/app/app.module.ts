@@ -7,17 +7,22 @@ import { ComponentCommunicationModule } from './ComponentCommunication/Component
 import { NavbarComponent } from './Layouts/navbar/navbar.component';
 import { LifecycleModule } from './ComponentLifecycle/lifecycle/lifecycle.module';
 
+import { AngularFormsModule } from './AngularForms/angularforms.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ComponentCommunicationModule,
-    LifecycleModule
+    LifecycleModule,
+    AngularFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
