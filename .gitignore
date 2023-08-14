@@ -8,6 +8,7 @@
 
 # Node
 Angular/practice/node_modules
+Angular/practice/.angular
 npm-debug.log
 yarn-error.log
 
@@ -19,6 +20,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.class
 
 # Visual Studio Code
 .vscode/*
