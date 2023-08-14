@@ -10,5 +10,6 @@ public class Map1 {
         Map<Integer,String> hashmap = new HashMap<>();
         Map<Integer,String> linkedhashmap = new LinkedHashMap<>();
         Map<Integer,String> treemap = new TreeMap<>();
+        
         }
 }
