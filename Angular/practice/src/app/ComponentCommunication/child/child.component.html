@@ -1,0 +1,7 @@
+
+<h1>{{email}}</h1>
+<p>child works!</p>
+<select class="form-select" aria-label="Default select example" [(ngModel)]="selectedstate" (change)="selectstate()">
+    <option *ngFor="let item of states" value="{{item}}" >{{item}}</option>
+    
+  </select>
