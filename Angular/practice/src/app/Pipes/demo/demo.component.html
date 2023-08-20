@@ -1,0 +1,30 @@
+
+<h1>Pure pipe</h1>
+<input type="text" [(ngModel)]="name">
+
+<h1>{{name}}</h1>
+<h1>{{name| titlecase}}</h1>
+<hr>
+
+<h1>Pipe with input</h1>
+<input type="text" [(ngModel)]="anothertext">
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="uppercase" id="flexCheckDefault" #upper (click)="uppercase(upper.value)" [checked]="ubtn">
+    <label class="form-check-label" for="flexCheckDefault">
+      Uppercase
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="lowercase" id="flexCheckChecked" #lower (click)="lowercase(lower.value)" [checked]="lbtn">
+    <label class="form-check-label" for="flexCheckChecked">
+      Lower Case
+    </label>
+  </div>
+
+<h1>{{anothertext| formatter:val}}</h1>
+
+<hr>
+<h1>Asynchronous pipe</h1>
+
+<h1 style="color: red;">{{asynctext | async}}</h1>
+

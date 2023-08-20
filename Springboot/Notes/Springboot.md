@@ -506,12 +506,15 @@ By following these steps, you can successfully deploy your Spring Boot applicati
 Certainly! Here are the top 50 Spring Boot interview questions with answers and examples:
 
 1. Q: What is Spring Boot?
+
 A: Spring Boot is a framework built on top of the Spring Framework that simplifies the development of Spring applications by providing pre-configured settings and sensible defaults.
 
 2. Q: How do you create a new Spring Boot project?
+
 A: You can create a new Spring Boot project using Spring Initializr, either through its web interface or by using Spring Boot CLI.
 
 3. Q: What are the advantages of using Spring Boot?
+
 A: Some advantages of using Spring Boot include:
    - Simplified configuration and auto-configuration.
    - Embedded server support (e.g., Tomcat, Jetty, Undertow).
@@ -520,9 +523,12 @@ A: Some advantages of using Spring Boot include:
    - Actuator for production-ready features like health checks and metrics.
 
 4. Q: How does Spring Boot simplify dependency management?
-A: Spring Boot uses "starter" dependencies to manage dependencies automatically. A starter is a special type of dependency that provides a pre-packaged set of dependencies for a specific use case.
+
+A: Spring Boot uses "starter" dependencies to manage dependencies automatically. 
+A starter is a special type of dependency that provides a pre-packaged set of dependencies for a specific use case.
 
 5. Q: How can you configure logging in a Spring Boot application?
+
 A: Spring Boot uses the Commons Logging API by default. You can configure logging by specifying properties in the `application.properties` or `application.yml` file.
 
 Example of setting the log level to DEBUG in `application.properties`:
@@ -531,6 +537,7 @@ logging.level.root=DEBUG
 ```
 
 6. Q: What is the purpose of the `@SpringBootApplication` annotation in Spring Boot?
+
 A: The `@SpringBootApplication` annotation is used to mark the main class of a Spring Boot application and enable component scanning, auto-configuration, and other Spring Boot features.
 
 Example:
@@ -544,6 +551,7 @@ public class MyApp {
 ```
 
 7. Q: How does Spring Boot automatically configure the DataSource?
+
 A: Spring Boot automatically configures the DataSource based on the available dependencies and properties in the `application.properties` or `application.yml` file.
 
 Example of configuring the DataSource in `application.properties`:
@@ -554,6 +562,7 @@ spring.datasource.password=root
 ```
 
 8. Q: What is the purpose of the `@Autowired` annotation in Spring Boot?
+
 A: The `@Autowired` annotation is used for automatic dependency injection. It allows Spring Boot to resolve and inject the necessary beans into a component.
 
 Example:
@@ -570,12 +579,14 @@ public class MyService {
 ```
 
 9. Q: What is the difference between `@Component`, `@Service`, and `@Repository` annotations in Spring Boot?
+
 A: 
 - `@Component`: It is a generic stereotype annotation for any Spring-managed component.
 - `@Service`: It is a specialization of `@Component` used to indicate that a class is a service.
 - `@Repository`: It is a specialization of `@Component` used to indicate that a class is a repository.
 
 10. Q: How do you define a custom configuration class in Spring Boot?
+
 A: You can define a custom configuration class by using the `@Configuration` annotation.
 
 Example:
@@ -587,6 +598,7 @@ public class MyConfig {
 ```
 
 11. Q: How can you use the `@Value` annotation to inject property values in Spring Boot?
+
 A: The `@Value` annotation is used to inject values from the `application.properties` or `application.yml` file into Spring components.
 
 Example of injecting a property value:
@@ -599,6 +611,7 @@ public class MyService {
 ```
 
 12. Q: How can you load external configuration properties in Spring Boot?
+
 A: You can load external configuration properties by specifying the location of the properties file using the `spring.config.location` property.
 
 Example of loading properties from an external file:
@@ -607,6 +620,7 @@ java -jar my-app.jar --spring.config.location=/path/to/application.properties
 ```
 
 13. Q: What is the purpose of the `@ConditionalOnProperty` annotation in Spring Boot?
+
 A: The `@ConditionalOnProperty` annotation is used to conditionally enable or disable a Spring bean based on the presence and value of a property.
 
 Example:
@@ -619,6 +633,7 @@ public class MyFeatureConfiguration {
 ```
 
 14. Q: What is the purpose of the `@Profile` annotation in Spring Boot?
+
 A: The `@Profile` annotation is used to specify which beans should be activated based on the active profile.
 
 Example:
@@ -631,6 +646,7 @@ public class DevConfiguration {
 ```
 
 15. Q: How do you enable Spring Boot Actuator endpoints?
+
 A: Spring Boot Actuator endpoints are enabled by default. You can disable specific endpoints or change their configuration in the `application.properties` or `application.yml` file.
 
 Example of disabling specific endpoints:
@@ -640,9 +656,11 @@ management.endpoint.health.enabled=true
 ```
 
 16. Q: What is the purpose of the Spring Boot Actuator's `/actuator` endpoint?
+
 A: The `/actuator` endpoint provides a list of available Actuator endpoints and their status.
 
 17. Q: How do you secure the Actuator endpoints in Spring Boot?
+
 A: You can secure the Actuator endpoints by providing appropriate security configuration in the `application.properties` or `application.yml` file.
 
 Example of securing the Actuator endpoints with basic authentication:
@@ -652,6 +670,7 @@ spring.security.user.password=admin-password
 ```
 
 18. Q: How do you enable and configure CORS in Spring Boot?
+
 A: You can enable and configure CORS in Spring Boot by adding the necessary configuration in a `WebMvcConfigurer` class.
 
 Example:
@@ -671,6 +690,7 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 19. Q: How do you handle exceptions in a Spring Boot application?
+
 A: You can handle exceptions in a Spring Boot application by using the `@ControllerAdvice` annotation to create a global exception handler.
 
 Example of a global exception handler:
@@ -685,6 +705,7 @@ public class GlobalExceptionHandler {
 ```
 
 20. Q: How do you enable caching in Spring Boot?
+
 A: You can enable caching in Spring Boot by adding the `@EnableCaching` annotation to a configuration class and configuring caching properties in the `application.properties` or `application.yml` file.
 
 Example of enabling caching:
@@ -701,6 +722,7 @@ spring.cache.type=caffeine
 ```
 
 21. Q: How can you use Caffeine cache in Spring Boot?
+
 A: You can use Caffeine cache in Spring Boot by adding the Caffeine cache dependency and specifying `spring.cache.type=caffeine` in the `application.properties` or `application.yml` file.
 
 Example of adding the Caffeine cache dependency:
@@ -716,6 +738,7 @@ spring.cache.type=caffeine
 ```
 
 22. Q: How do you schedule tasks in Spring Boot?
+
 A: You can schedule tasks in Spring Boot by using the `@Scheduled` annotation on a method in a `@Component` or `@Service` class.
 
 Example of scheduling a task:
@@ -730,6 +753,7 @@ public class MyService {
 ```
 
 23. Q: How do you handle form submissions in Spring Boot?
+
 A: You can handle form submissions in Spring Boot by using the `@Controller` annotation and `@PostMapping` annotation for the form submission endpoint.
 
 Example of handling a form submission:
@@ -745,6 +769,7 @@ public class MyController {
 ```
 
 24. Q: How can you use Spring Boot's CommandLineRunner interface?
+
 A: The `CommandLineRunner` interface allows you to execute code after the Spring Boot application has started.
 
 Example of using `CommandLineRunner`:
@@ -759,6 +784,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 ```
 
 25. Q: How do you externalize configuration in Spring Boot using properties files?
+
 A: You can externalize configuration in Spring Boot by placing properties in the `application.properties` or `application.yml` file.
 
 Example of externalizing configuration in `application.properties`:
@@ -775,6 +801,7 @@ public class MyService {
 ```
 
 26. Q: How can you use external configuration properties from environment variables in Spring Boot?
+
 A: You can use external configuration properties from environment variables by specifying the environment variable name in the `application.properties` or `application.yml` file.
 
 Example of using an environment variable:
@@ -783,6 +810,7 @@ my.property=${MY_ENV_VARIABLE}
 ```
 
 27. Q: What is the purpose of the `@SpringBootTest` annotation in Spring Boot?
+
 A: The `@SpringBootTest` annotation is used to create an application context for integration tests in Spring Boot.
 
 Example:
@@ -794,6 +822,7 @@ public class MyIntegrationTest {
 ```
 
 28. Q: How do you perform unit testing in Spring Boot?
+
 A: You can perform unit testing in Spring Boot by using the `@MockBean` and `@Autowired` annotations to mock dependencies and inject them into the test class.
 
 Example of unit testing a service:
@@ -811,6 +840,7 @@ public class MyServiceTest {
 ```
 
 29. Q: How can you configure multiple data sources in Spring Boot?
+
 A: You can configure multiple data sources in Spring Boot by defining multiple `DataSource` beans with different configurations.
 
 Example of configuring multiple data sources:
@@ -832,6 +862,7 @@ public class DataSourceConfig {
 ```
 
 30. Q: How do you enable HTTPS in a Spring Boot application?
+
 A: You can enable HTTPS in a Spring Boot application by providing an SSL certificate and configuring the `server.ssl` properties in the `application.properties` or `application.yml` file.
 
 Example of enabling HTTPS:
@@ -843,6 +874,7 @@ server.ssl.key-alias=my-alias
 ```
 
 31. Q: How can you handle static resources in Spring Boot?
+
 A: Spring Boot automatically serves static resources from the `/static`, `/public`, and `/resources` directories in the classpath.
 
 Example of serving a static resource:
@@ -851,6 +883,7 @@ src/main/resources/static/myfile.html
 ```
 
 32. Q: What is the purpose of the `@Valid` annotation in Spring Boot?
+
 A: The `@Valid` annotation is used to perform bean validation on request payloads in Spring Boot.
 
 Example of using `@Valid` with a request payload:
@@ -862,6 +895,7 @@ public ResponseEntity<String> saveUser(@Valid @RequestBody User user) {
 ```
 
 33. Q: How do you manage transactions in Spring Boot?
+
 A: Spring Boot automatically manages transactions when using Spring Data JPA or Spring's `@Transactional` annotation.
 
 Example of managing transactions using `@Transactional`:
@@ -879,6 +913,7 @@ public class MyService {
 ```
 
 34. Q: What is the purpose of the `@EnableTransactionManagement` annotation in Spring Boot?
+
 A: The `@EnableTransactionManagement` annotation is used to enable Spring's transaction management in a Spring Boot application.
 
 Example of enabling transaction management:
@@ -891,6 +926,7 @@ public class TransactionConfig {
 ```
 
 35. Q: How can you use Spring Boot's embedded database for testing?
+
 A: Spring Boot provides an embedded database (H2, HSQL, or Derby) that can be used for testing without the need for an external database setup.
 
 Example of using H2 for testing:
@@ -902,6 +938,7 @@ spring.datasource.url=jdbc:h2:mem:testdb
 
 
 36. Q: How do you enable cross-origin requests in Spring Boot?
+
 A: You can enable cross-origin requests in Spring Boot by adding the necessary configuration to the `WebMvcConfigurer` class.
 
 Example of enabling cross-origin requests:
@@ -919,6 +956,7 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 37. Q: What is the purpose of the `@EnableJpaRepositories` annotation in Spring Boot?
+
 A: The `@EnableJpaRepositories` annotation is used to enable Spring Data JPA repositories in a Spring Boot application.
 
 Example of enabling JPA repositories:
@@ -931,6 +969,7 @@ public class JpaConfig {
 ```
 
 38. Q: How do you create custom error pages in Spring Boot?
+
 A: You can create custom error pages in Spring Boot by configuring an `ErrorController` class.
 
 Example of creating a custom error page:
@@ -950,6 +989,7 @@ public class MyErrorController implements ErrorController {
 ```
 
 39. Q: What is the purpose of the `@Bean` annotation in Spring Boot?
+
 A: The `@Bean` annotation is used to define a bean in the Spring application context.
 
 Example of defining a bean:
@@ -963,26 +1003,8 @@ public class MyConfig {
 }
 ```
 
-40. Q: How do you create custom data validation in Spring Boot?
-A: You can create custom data validation in Spring Boot by implementing the `Validator` interface and registering it with the `WebDataBinder`.
-
-Example of creating a custom validator:
-```java
-@Component
-public class MyValidator implements Validator {
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return MyForm.class.isAssignableFrom(clazz);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        // Custom validation logic
-    }
-}
-```
-
 41. Q: How do you handle file uploads in Spring Boot?
+
 A: You can handle file uploads in Spring Boot by using the `@RequestParam` annotation to bind the uploaded file to a `MultipartFile` parameter.
 
 Example of handling file upload:
@@ -994,6 +1016,7 @@ public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFi
 ```
 
 42. Q: What is the purpose of the `@RestController` annotation in Spring Boot?
+
 A: The `@RestController` annotation is a combination of `@Controller` and `@ResponseBody`. It is used to create RESTful web services that directly return data in the response body.
 
 Example of using `@RestController`:
@@ -1008,6 +1031,7 @@ public class MyController {
 ```
 
 43. Q: How do you handle JSON data in Spring Boot?
+
 A: Spring Boot automatically handles JSON data by using Jackson as the default JSON converter.
 
 Example of handling JSON data in a controller:
@@ -1023,6 +1047,7 @@ public class MyController {
 ```
 
 44. Q: How can you use Spring Boot's TestRestTemplate for integration testing?
+
 A: You can use the `TestRestTemplate` class provided by Spring Boot to perform integration testing for RESTful APIs.
 
 Example of using `TestRestTemplate` for integration testing:
@@ -1042,6 +1067,7 @@ public class MyIntegrationTest {
 ```
 
 45. Q: How do you customize the banner in a Spring Boot application?
+
 A: You can customize the banner in a Spring Boot application by creating a `banner.txt` file in the `src/main/resources` directory.
 
 Example of a custom banner:
@@ -1054,6 +1080,7 @@ Example of a custom banner:
 ```
 
 46. Q: What is the purpose of the `@TestPropertySource` annotation in Spring Boot?
+
 A: The `@TestPropertySource` annotation is used to specify the properties file to be used during integration testing.
 
 Example of using `@TestPropertySource` in a test class:
@@ -1066,6 +1093,7 @@ public class MyIntegrationTest {
 ```
 
 47. Q: How do you configure external properties for testing in Spring Boot?
+
 A: You can configure external properties for testing by using the `@TestPropertySource` annotation or by providing a custom `application.properties` file in the test resources folder.
 
 Example of using `@TestPropertySource` to load external properties:
@@ -1078,6 +1106,7 @@ public class MyIntegrationTest {
 ```
 
 48. Q: How can you use Spring Boot's `@MockBean` to mock dependencies for testing?
+
 A: The `@MockBean` annotation is used to create a mock of a Spring bean during testing.
 
 Example of using `@MockBean`:
@@ -1103,6 +1132,7 @@ public class MyServiceTest {
 ```
 
 49. Q: How do you configure a custom application.properties file for testing in Spring Boot?
+
 A: You can create a custom `application.properties` file in the test resources folder to configure specific properties for testing.
 
 Example of a custom `application.properties` for testing:
@@ -1111,6 +1141,7 @@ my.property=test-value
 ```
 
 50. Q: How do you enable hot-swapping of classes during development in Spring Boot?
+
 A: Spring Boot supports hot-swapping of classes during development with the help of tools like Spring DevTools and IDE plugins.
 
 To enable hot-swapping, you can add the `spring-boot-devtools` dependency in your project.

@@ -28,6 +28,30 @@ package oOPS;
 // 18. An abstract class can have both final and non-final instance fields and methods.
 // 19. An abstract class can have both final and non-final instance methods and static fields.An abstract class can have parameterized constructors and the default constructor is always present in an abstract class.
 
+
+interface Animal{
+    void eat();
+    void travel();
+}
+
+abstract class Dog implements Animal{
+
+    void play(){
+        System.out.println("hiii");
+    }
+}
+
+class Labrador extends Dog{
+
+    public void eat(){
+        
+    }
+
+}
 public class Abstractions {
     
+    public static void main(String[] args) {
+        Labrador l=new Labrador();
+        l.eat();
+    }
 }

@@ -153,11 +153,64 @@ In the example above, we have a class `Person` with two constructors: one that t
 9. **What is encapsulation in Java?**
    - Answer: Encapsulation is the process of bundling data (variables) and methods (behaviors) that operate on the data within a single unit (class). It helps to hide the internal implementation details and allows access to the data only through defined methods (getters and setters).
 
+    Encapsulation is one of the four fundamental principles of object-oriented programming (OOP) and is a key concept in Java. It refers to the practice of bundling the data (attributes) and methods (functions) that operate on the data into a single unit, known as a class. Encapsulation helps in achieving data hiding, abstraction, and controlled access to an object's internal state.
+
+    In Java, encapsulation is achieved through the use of access modifiers and getter and setter methods:
+
+    1. **Access Modifiers:** Java provides four types of access modifiers: `private`, `default` (no modifier), `protected`, and `public`. These modifiers control the visibility and accessibility of class members (fields and methods) from other classes.
+
+    2. **Getter Methods:** Getter methods are used to retrieve the values of private fields from outside the class. By making the fields private and providing getter methods, you can control how the data is accessed and provide a controlled interface for reading the data.
+
+    3. **Setter Methods:** Setter methods are used to modify the values of private fields from outside the class. By using setter methods, you can control how the data is modified and enforce any necessary validation or constraints.
+
+    Here's an example of encapsulation in Java:
+
+    ```java
+    public class EncapsulationExample {
+        private int age;
+        private String name;
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            if (age >= 0) {
+                this.age = age;
+            } else {
+                System.out.println("Age cannot be negative.");
+            }
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            if (name != null && !name.isEmpty()) {
+                this.name = name;
+            } else {
+                System.out.println("Name cannot be null or empty.");
+            }
+        }
+    }
+    ```
+
+    In this example:
+
+    - The `EncapsulationExample` class has two private fields: `age` and `name`.
+    - Getter methods (`getAge()` and `getName()`) allow controlled access to the fields.
+    - Setter methods (`setAge()` and `setName()`) provide controlled modification of the fields with validation checks.
+
+    With encapsulation, you can ensure that the internal state of an object is not directly accessible from outside the class, thereby preventing unintended modifications and ensuring consistent behavior.
+
+    To sum up, encapsulation is a powerful concept in Java and OOP that helps in achieving data hiding, abstraction, and controlled access to an object's state. It allows you to define clear boundaries for how data can be accessed and modified, leading to more maintainable and flexible code.
 10. **What is inheritance in Java?**
     - Answer: Inheritance is a mechanism in Java where a new class (subclass) is created from an existing class (superclass), inheriting its properties and behaviors. The subclass can extend the functionality of the superclass and also have its own unique features.
 
 11. **How do you achieve multiple inheritance in Java?**
     - Answer: Java does not support multiple inheritance through classes (i.e., a class cannot extend more than one class). However, it supports multiple inheritance through interfaces, where a class can implement multiple interfaces.
+    
 
 12. **What is the `super` keyword in Java?**
     - Answer: The `super` keyword is used in a subclass to refer to its superclass. It is used to call the superclass's constructor, access its methods, or access its variables that are hidden by the subclass.
@@ -262,7 +315,112 @@ In the example above, we have a class `Person` with two constructors: one that t
 41. **What is the use of the `default` keyword in Java interfaces?**
     - Answer: The `default` keyword is used to define a default implementation for a method in a Java interface. It allows adding new methods to existing interfaces without breaking backward compatibility for implementing classes.
 
-42. **What is a nested class in Java?**
+## Inner classes
+
+Certainly! Let's revisit the examples and see how objects are created for each type of inner class:
+
+**1. Non-static Inner Class (Inner Class):**
+
+```java
+class Outer {
+    private int outerValue;
+
+    class Inner {
+        void display() {
+            System.out.println("Outer value: " + outerValue);
+        }
+    }
+}
+
+public class InnerClassExample {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Outer.Inner inner = outer.new Inner();
+        inner.display();
+    }
+}
+```
+
+In this example, an instance of the non-static inner class `Inner` is created using the syntax `outer.new Inner();`.
+
+**2. Static Nested Class:**
+
+```java
+class Outer {
+    static class Nested {
+        void display() {
+            System.out.println("This is a static nested class.");
+        }
+    }
+}
+
+public class StaticNestedClassExample {
+    public static void main(String[] args) {
+        Outer.Nested nested = new Outer.Nested();
+        nested.display();
+    }
+}
+```
+
+For a static nested class, an instance is created using the syntax `Outer.Nested nested = new Outer.Nested();`.
+
+**3. Local Inner Class:**
+
+```java
+class Outer {
+    void outerMethod() {
+        final int localVar = 42;
+
+        class LocalInner {
+            void display() {
+                System.out.println("Local variable: " + localVar);
+            }
+        }
+
+        LocalInner inner = new LocalInner();
+        inner.display();
+    }
+}
+
+public class LocalInnerClassExample {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.outerMethod();
+    }
+}
+```
+
+A local inner class instance is created within a method, as shown in the `outerMethod` example.
+
+**4. Anonymous Inner Class:**
+
+```java
+interface Greeting {
+    void greet();
+}
+
+class Outer {
+    void sayHello() {
+        Greeting greeting = new Greeting() {
+            public void greet() {
+                System.out.println("Hello, anonymous inner class!");
+            }
+        };
+        greeting.greet();
+    }
+}
+
+public class AnonymousInnerClassExample {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.sayHello();
+    }
+}
+```
+
+An instance of an anonymous inner class is created directly within a method, as demonstrated in the `sayHello` example.
+
+In all cases, the created inner class instances have access to the members of their enclosing classes and can provide specialized behavior and implementations.42. **What is a nested class in Java?**
     - Answer: A nested class in Java is a class that is defined within another class. There are four types of nested classes in Java: static nested class, non-static (inner) class, local class, and anonymous class.
 
 43. **What is an inner class in Java?**

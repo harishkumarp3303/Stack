@@ -11,6 +11,8 @@ The Java Stream API provides a rich set of methods that allow you to perform var
 5. sorted(): Sorts the elements in natural order (requires elements to be comparable).
 6. sorted(Comparator<T> comparator): Sorts the elements using the specified comparator.
 7. peek(Consumer<T> action): Performs the specified action on each element, returning the same stream.
+
+
 # Terminal Operations:
 
 1. forEach(Consumer<T> action): Applies the given action to each element in the stream.

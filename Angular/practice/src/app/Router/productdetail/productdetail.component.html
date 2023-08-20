@@ -1,0 +1,19 @@
+<p>productdetail works!</p>
+
+<hr>
+<h1>Retrieving Route params</h1>
+<br>
+<h1>Product</h1>
+<h3>{{product.id}}</h3>
+<h3>{{product.name}}</h3>
+<h3>{{product.price}}</h3>
+
+<h6>Load same component with different parameters and subscribe it in ts hover below to view the changes</h6>
+<a  [routerLink]="['/router/productdetail',1,'keyboard',3000]">Load same component with same different data</a>
+
+<hr>
+
+<h1>Retrieving query Parameters and fragments</h1>
+
+<h5>Query parametrs : {{queryparamers | json}}</h5>
+<h5>Fragments : {{fragments}}</h5>

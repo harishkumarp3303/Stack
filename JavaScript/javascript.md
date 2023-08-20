@@ -1,3 +1,5 @@
+
+
 Certainly! Below is an extended list of JavaScript interview questions along with examples to help you understand the concepts better:
 
 1. **What is JavaScript?**

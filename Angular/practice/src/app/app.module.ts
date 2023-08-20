@@ -8,6 +8,11 @@ import { NavbarComponent } from './Layouts/navbar/navbar.component';
 import { LifecycleModule } from './ComponentLifecycle/lifecycle/lifecycle.module';
 
 import { AngularFormsModule } from './AngularForms/angularforms.module';
+import { HttpNObservableModule } from './HttpnObservables/httpnobservable.module';
+import { AngularRouterModule } from './Router/AngularRouter.module';
+import { DirectiveModule } from './Directives/directive.module';
+import { PipesModule } from './Pipes/pipes/pipes.module';
+
 
 
 @NgModule({
@@ -15,14 +20,17 @@ import { AngularFormsModule } from './AngularForms/angularforms.module';
     AppComponent,
     NavbarComponent,
 
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ComponentCommunicationModule,
     LifecycleModule,
-    AngularFormsModule
+    AngularFormsModule,
+    HttpNObservableModule,
+    AngularRouterModule,
+    DirectiveModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -168,8 +168,67 @@ class parent8 extends GrandParent1{
 // inside the constructor of the child class. The super() method must be the first line 
 // inside the constructor of child class in order to call parent class’s constructor otherwise it may generate an error.
 
+interface Animal {
+    void eat();
+}
+
+interface Mammal {
+    void breathe();
+}
+
+class Dog implements Animal, Mammal {
+    @Override
+    public void eat() {
+        System.out.println("Dog is eating.");
+    }
+
+    @Override
+    public void breathe() {
+        System.out.println("Dog is breathing.");
+    }
+}
+
+
+
+interface Engine {
+    void start() ;
+}
+
+interface CarEngine {
+    // void rotate() ;
+
+    void start() ;
+}
+
+class Toyota implements Engine,CarEngine{
+
+    // @Override
+    // public void rotate() {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'rotate'");
+    // }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
+    }
+
+}
+
+class Car {
+
+
+}
+
+
+
 
 
 public class Inheritances {
     
+
+    public static void main(String[] args) {
+ 
+    }
 }

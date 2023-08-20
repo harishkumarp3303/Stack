@@ -1,4 +1,4 @@
-package java8.functionalInterface;
+
 
 
 
@@ -26,7 +26,7 @@ public class Main {
 		System.out.println(s.sum(10, 20));
 		
 		
-//		Let’s understand with classic example of Runnable:
+//		Letï¿½s understand with classic example of Runnable:
 //			When we need to create a Thread and pass an anonymous Runnable interface, we can do it as follow.
 		
 		// Using anonymous class

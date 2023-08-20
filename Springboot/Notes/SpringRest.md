@@ -1,10 +1,12 @@
 Certainly! Here are the top 50 Spring REST API interview questions with answers and examples:
 
 1. Q: What is Spring REST API?
-A: Spring REST API is a part of the Spring Framework that provides support for building RESTful web services in Java.
+    
+    A: Spring REST API is a part of the Spring Framework that provides support for building RESTful web services in Java.
 
 2. Q: How can you create a RESTful API using Spring Boot?
-A: You can create a RESTful API using Spring Boot by creating a Spring Boot project and defining REST endpoints using Spring's `@RestController` annotation.
+    
+    A: You can create a RESTful API using Spring Boot by creating a Spring Boot project and defining REST endpoints using Spring's `@RestController` annotation.
 
 Example:
 ```java
@@ -18,7 +20,8 @@ public class HelloController {
 ```
 
 3. Q: How can you handle HTTP GET requests in Spring REST?
-A: You can handle HTTP GET requests in Spring REST by using the `@GetMapping` annotation.
+    
+    A: You can handle HTTP GET requests in Spring REST by using the `@GetMapping` annotation.
 
 Example:
 ```java
@@ -29,7 +32,8 @@ public User getUserById(@PathVariable Long id) {
 ```
 
 4. Q: How can you handle HTTP POST requests in Spring REST?
-A: You can handle HTTP POST requests in Spring REST by using the `@PostMapping` annotation.
+    
+    A: You can handle HTTP POST requests in Spring REST by using the `@PostMapping` annotation.
 
 Example:
 ```java
@@ -40,7 +44,8 @@ public User createUser(@RequestBody User user) {
 ```
 
 5. Q: How can you handle HTTP PUT requests in Spring REST?
-A: You can handle HTTP PUT requests in Spring REST by using the `@PutMapping` annotation.
+    
+    A: You can handle HTTP PUT requests in Spring REST by using the `@PutMapping` annotation.
 
 Example:
 ```java
@@ -51,7 +56,8 @@ public User updateUser(@PathVariable Long id, @RequestBody User user) {
 ```
 
 6. Q: How can you handle HTTP DELETE requests in Spring REST?
-A: You can handle HTTP DELETE requests in Spring REST by using the `@DeleteMapping` annotation.
+    
+    A: You can handle HTTP DELETE requests in Spring REST by using the `@DeleteMapping` annotation.
 
 Example:
 ```java
@@ -62,7 +68,8 @@ public void deleteUser(@PathVariable Long id) {
 ```
 
 7. Q: How can you pass parameters in the URL in Spring REST?
-A: You can pass parameters in the URL in Spring REST using `@PathVariable` for path parameters and `@RequestParam` for query parameters.
+    
+    A: You can pass parameters in the URL in Spring REST using `@PathVariable` for path parameters and `@RequestParam` for query parameters.
 
 Example with path parameter:
 ```java
@@ -81,7 +88,8 @@ public List<User> getUsersByRole(@RequestParam String role) {
 ```
 
 8. Q: What is the purpose of the `@RequestBody` annotation in Spring REST?
-A: The `@RequestBody` annotation is used to map the request body of an HTTP request to a method parameter in Spring REST.
+    
+    A: The `@RequestBody` annotation is used to map the request body of an HTTP request to a method parameter in Spring REST.
 
 Example:
 ```java
@@ -92,7 +100,8 @@ public User createUser(@RequestBody User user) {
 ```
 
 9. Q: What is the purpose of the `@ResponseBody` annotation in Spring REST?
-A: The `@ResponseBody` annotation is used to indicate that the return value of a method should be written directly to the HTTP response body.
+    
+    A: The `@ResponseBody` annotation is used to indicate that the return value of a method should be written directly to the HTTP response body.
 
 Example:
 ```java
@@ -104,12 +113,14 @@ public String sayHello() {
 ```
 
 10. Q: What is the difference between `@PathVariable` and `@RequestParam` in Spring REST?
-A: 
+    
+    A: 
 - `@PathVariable`: It is used to extract values from the URI path.
 - `@RequestParam`: It is used to extract values from query parameters in the URL.
 
 11. Q: How can you handle exceptions in Spring REST APIs?
-A: You can handle exceptions in Spring REST APIs using the `@ExceptionHandler` annotation to define custom exception handling methods.
+    
+    A: You can handle exceptions in Spring REST APIs using the `@ExceptionHandler` annotation to define custom exception handling methods.
 
 Example:
 ```java
@@ -120,7 +131,8 @@ public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundEx
 ```
 
 12. Q: What is the purpose of the `ResponseEntity` class in Spring REST?
-A: The `ResponseEntity` class represents an HTTP response, including status code, headers, and the response body.
+    
+    A: The `ResponseEntity` class represents an HTTP response, including status code, headers, and the response body.
 
 Example:
 ```java
@@ -131,7 +143,8 @@ public ResponseEntity<String> sayHello() {
 ```
 
 13. Q: How can you return different HTTP status codes in Spring REST?
-A: You can return different HTTP status codes in Spring REST by using the `ResponseEntity` class or by using the appropriate annotations such as `@ResponseStatus`.
+    
+    A: You can return different HTTP status codes in Spring REST by using the `ResponseEntity` class or by using the appropriate annotations such as `@ResponseStatus`.
 
 Example with `ResponseEntity`:
 ```java
@@ -156,7 +169,8 @@ public void deleteUser(@PathVariable Long id) {
 ```
 
 14. Q: How can you handle CORS (Cross-Origin Resource Sharing) in Spring REST?
-A: You can handle CORS in Spring REST by configuring CORS settings in your Spring Boot application.
+    
+    A: You can handle CORS in Spring REST by configuring CORS settings in your Spring Boot application.
 
 Example:
 ```java
@@ -173,7 +187,8 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 15. Q: What is the purpose of the `@CrossOrigin` annotation in Spring REST?
-A: The `@CrossOrigin` annotation is used to enable CORS for specific controller methods.
+    
+    A: The `@CrossOrigin` annotation is used to enable CORS for specific controller methods.
 
 Example:
 ```java
@@ -188,7 +203,8 @@ public class HelloController {
 ```
 
 16. Q: What is the `MediaType` class in Spring REST used for?
-A: The `MediaType` class in Spring REST is used to represent Internet Media Types (MIME types) for HTTP requests and responses.
+    
+    A: The `MediaType` class in Spring REST is used to represent Internet Media Types (MIME types) for HTTP requests and responses.
 
 Example:
 ```java
@@ -199,7 +215,8 @@ public Data getData() {
 ```
 
 17. Q: What is content negotiation in Spring REST?
-A: Content negotiation in Spring REST is the process of determining the best response representation based on the client's request.
+    
+    A: Content negotiation in Spring REST is the process of determining the best response representation based on the client's request.
 
 Example:
 ```java
@@ -210,7 +227,8 @@ public Data getData() {
 ```
 
 18. Q: What is the purpose of the `consumes` attribute in Spring REST annotations?
-A: The `consumes` attribute is used to specify the media types that a method can consume (accept) as request content.
+    
+    A: The `consumes` attribute is used to specify the media types that a method can consume (accept) as request content.
 
 Example:
 ```java
@@ -221,7 +239,8 @@ public User createUser(@RequestBody User user) {
 ```
 
 19. Q: What is the purpose of the `produces` attribute in Spring REST annotations?
-A: The `produces` attribute is used to specify the media types that a method can
+    
+    A: The `produces` attribute is used to specify the media types that a method can
 
  produce as response content.
 
@@ -234,7 +253,8 @@ public Data getData() {
 ```
 
 20. Q: How can you handle validation in Spring REST APIs?
-A: You can handle validation in Spring REST APIs using annotations such as `@Valid` and `@Validated` along with validation constraints.
+    
+    A: You can handle validation in Spring REST APIs using annotations such as `@Valid` and `@Validated` along with validation constraints.
 
 Example with `@Valid`:
 ```java
@@ -253,7 +273,8 @@ public interface MyService {
 ```
 
 21. Q: What is the purpose of the `@Valid` annotation in Spring REST?
-A: The `@Valid` annotation is used to indicate that the method parameter should be validated.
+    
+    A: The `@Valid` annotation is used to indicate that the method parameter should be validated.
 
 Example:
 ```java
@@ -264,7 +285,8 @@ public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 ```
 
 22. Q: What is the purpose of the `@Validated` annotation in Spring REST?
-A: The `@Validated` annotation is used at the class level to enable method-level validation.
+    
+    A: The `@Validated` annotation is used at the class level to enable method-level validation.
 
 Example:
 ```java
@@ -275,7 +297,8 @@ public interface MyService {
 ```
 
 23. Q: How can you handle file uploads in Spring REST APIs?
-A: You can handle file uploads in Spring REST APIs by using the `@RequestParam` annotation with `MultipartFile`.
+    
+    A: You can handle file uploads in Spring REST APIs by using the `@RequestParam` annotation with `MultipartFile`.
 
 Example:
 ```java
@@ -286,7 +309,8 @@ public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile fil
 ```
 
 24. Q: How can you handle file downloads in Spring REST APIs?
-A: You can handle file downloads in Spring REST APIs by using the `ResponseEntity` class to set the appropriate response headers.
+    
+    A: You can handle file downloads in Spring REST APIs by using the `ResponseEntity` class to set the appropriate response headers.
 
 Example:
 ```java
@@ -302,7 +326,8 @@ public ResponseEntity<Resource> downloadFile() throws IOException {
 ```
 
 25. Q: How can you implement pagination in Spring REST APIs?
-A: You can implement pagination in Spring REST APIs using query parameters to specify the page number and size.
+    
+    A: You can implement pagination in Spring REST APIs using query parameters to specify the page number and size.
 
 Example:
 ```java
@@ -315,7 +340,8 @@ public Page<User> getUsers(@RequestParam(defaultValue = "0") int page,
 ```
 
 26. Q: What is HATEOAS in Spring REST?
-A: HATEOAS stands for "Hypermedia as the Engine of Application State," and it allows clients to navigate a REST API dynamically by following hypermedia links.
+    
+    A: HATEOAS stands for "Hypermedia as the Engine of Application State," and it allows clients to navigate a REST API dynamically by following hypermedia links.
 
 Example using `ResourceSupport`:
 ```java
@@ -332,7 +358,8 @@ public class UserController {
 ```
 
 27. Q: What is the `linkTo` method in Spring REST?
-A: The `linkTo` method is used to create hypermedia links to controller methods.
+    
+    A: The `linkTo` method is used to create hypermedia links to controller methods.
 
 Example:
 ```java
@@ -341,7 +368,8 @@ resource.add(linkTo(methodOn(UserController.class).getUser(id)).withSelfRel());
 ```
 
 28. Q: What is the purpose of the `@RestControllerAdvice` annotation in Spring REST?
-A: The `@RestControllerAdvice` annotation is used to define global exception handling for REST controllers.
+    
+    A: The `@RestControllerAdvice` annotation is used to define global exception handling for REST controllers.
 
 Example:
 ```java
@@ -355,7 +383,8 @@ public class GlobalExceptionHandler {
 ```
 
 29. Q: What is the purpose of the `@RequestMapping` annotation in Spring REST?
-A: The `@RequestMapping` annotation is used to map HTTP requests to specific handler methods.
+    
+    A: The `@RequestMapping` annotation is used to map HTTP requests to specific handler methods.
 
 Example:
 ```java
@@ -366,12 +395,14 @@ public List<User> getUsers() {
 ```
 
 30. Q: What is the difference between `@RequestMapping` and `@GetMapping` in Spring REST?
-A: 
+    
+    A: 
 - `@RequestMapping`: It is a general-purpose annotation that maps all HTTP methods by default.
 - `@GetMapping`: It is a specialized form of `@RequestMapping` that maps HTTP GET requests.
 
 31. Q: What is the purpose of the `@PostMapping` annotation in Spring REST?
-A: The `@PostMapping` annotation is used to map HTTP POST requests to specific handler methods.
+    
+    A: The `@PostMapping` annotation is used to map HTTP POST requests to specific handler methods.
 
 Example:
 ```java
@@ -382,7 +413,8 @@ public User createUser(@RequestBody User user) {
 ```
 
 32. Q: What is the purpose of the `@PutMapping` annotation in Spring REST?
-A: The `@PutMapping` annotation is used to map HTTP PUT requests to specific handler methods.
+    
+    A: The `@PutMapping` annotation is used to map HTTP PUT requests to specific handler methods.
 
 Example:
 ```java
@@ -393,7 +425,8 @@ public User updateUser(@PathVariable Long id, @RequestBody User user) {
 ```
 
 33. Q: What is the purpose of the `@DeleteMapping` annotation in Spring REST?
-A: The `@DeleteMapping` annotation is used to map HTTP DELETE requests to specific handler methods.
+    
+    A: The `@DeleteMapping` annotation is used to map HTTP DELETE requests to specific handler methods.
 
 Example:
 ```java
@@ -404,7 +437,8 @@ public void deleteUser(@PathVariable Long id) {
 ```
 
 34. Q: What is the purpose of the `@PatchMapping` annotation in Spring REST?
-A: The `@PatchMapping` annotation is used to map HTTP PATCH requests to specific handler methods.
+    
+    A: The `@PatchMapping` annotation is used to map HTTP PATCH requests to specific handler methods.
 
 Example:
 ```java
@@ -415,7 +449,8 @@ public User patchUser(@PathVariable Long id, @RequestBody Map<String, Object> up
 ```
 
 35. Q: What is the purpose of the `@RequestParam` annotation in Spring REST?
-A: The `@RequestParam` annotation is used to extract query parameters from the URL.
+    
+    A: The `@RequestParam` annotation is used to extract query parameters from the URL.
 
 Example:
 ```java
@@ -426,7 +461,8 @@ public List<User> getUsersByRole(@RequestParam String role) {
 ```
 
 36. Q: What is the purpose of the `@RequestHeader` annotation in Spring REST?
-A: The `@RequestHeader` annotation is used to extract values from HTTP headers.
+    
+    A: The `@RequestHeader` annotation is used to extract values from HTTP headers.
 
 Example:
 ```java
@@ -437,7 +473,8 @@ public List<User> getUsers(@RequestHeader("Authorization") String token) {
 ```
 
 37. Q: What is the purpose of the `@PathVariable` annotation in Spring REST?
-A: The `@PathVariable` annotation is used to extract values from URI path variables.
+    
+    A: The `@PathVariable` annotation is used to extract values from URI path variables.
 
 Example:
 ```java
@@ -450,7 +487,8 @@ public User getUserById(@PathVariable Long id) {
 ```
 
 38. Q: What is the purpose of the `@RequestBody` annotation in Spring REST?
-A: The `@RequestBody` annotation is used to map the request body of an HTTP request to a method parameter.
+    
+    A: The `@RequestBody` annotation is used to map the request body of an HTTP request to a method parameter.
 
 Example:
 ```java
@@ -461,7 +499,8 @@ public User createUser(@RequestBody User user) {
 ```
 
 39. Q: What is the purpose of the `@ModelAttribute` annotation in Spring REST?
-A: The `@ModelAttribute` annotation is used to bind method parameters to model attributes.
+    
+    A: The `@ModelAttribute` annotation is used to bind method parameters to model attributes.
 
 Example:
 ```java
@@ -472,7 +511,8 @@ public User createUser(@ModelAttribute User user) {
 ```
 
 40. Q: What is the purpose of the `@ResponseBody` annotation in Spring REST?
-A: The `@ResponseBody` annotation is used to indicate that the return value of a method should be written directly to the HTTP response body.
+    
+    A: The `@ResponseBody` annotation is used to indicate that the return value of a method should be written directly to the HTTP response body.
 
 Example:
 ```java
@@ -484,7 +524,8 @@ public String sayHello() {
 ```
 
 41. Q: What is the purpose of the `@RestController` annotation in Spring REST?
-A: The `@RestController` annotation is a specialized version of `@Controller` that combines `@Controller` and `@ResponseBody`.
+    
+    A: The `@RestController` annotation is a specialized version of `@Controller` that combines `@Controller` and `@ResponseBody`.
 
 Example:
 ```java
@@ -498,7 +539,8 @@ public class HelloController {
 ```
 
 42. Q: What is the purpose of the `@RestControllerAdvice` annotation in Spring REST?
-A: The `@RestControllerAdvice` annotation is used to define global exception handling for REST controllers.
+    
+    A: The `@RestControllerAdvice` annotation is used to define global exception handling for REST controllers.
 
 Example:
 ```java
@@ -512,7 +554,8 @@ public class GlobalExceptionHandler {
 ```
 
 43. Q: How can you implement content negotiation in Spring REST APIs?
-A: You can implement content negotiation in Spring REST APIs by using the `produces` attribute in the `@RequestMapping` annotation or by setting the `Accept` header in the HTTP request.
+    
+    A: You can implement content negotiation in Spring REST APIs by using the `produces` attribute in the `@RequestMapping` annotation or by setting the `Accept` header in the HTTP request.
 
 Example with `produces` attribute:
 ```java
@@ -528,7 +571,8 @@ curl -H "Accept: application/json" http://example.com/data
 ```
 
 44. Q: What is the purpose of the `MediaType` class in Spring REST?
-A: The `MediaType` class in Spring REST is used to represent Internet Media Types (MIME types) for HTTP requests and responses.
+    
+    A: The `MediaType` class in Spring REST is used to represent Internet Media Types (MIME types) for HTTP requests and responses.
 
 Example:
 ```java
@@ -539,7 +583,8 @@ public Data getData() {
 ```
 
 45. Q: What is the purpose of the `@CrossOrigin` annotation in Spring REST?
-A: The `@CrossOrigin` annotation is used to enable CORS (Cross-Origin Resource Sharing) for specific controller methods.
+    
+    A: The `@CrossOrigin` annotation is used to enable CORS (Cross-Origin Resource Sharing) for specific controller methods.
 
 Example:
 ```java
@@ -554,7 +599,8 @@ public class HelloController {
 ```
 
 46. Q: How can you handle file uploads in Spring REST APIs?
-A: You can handle file uploads in Spring REST APIs by using the `@RequestParam` annotation with `MultipartFile`.
+    
+    A: You can handle file uploads in Spring REST APIs by using the `@RequestParam` annotation with `MultipartFile`.
 
 Example:
 ```java
@@ -565,7 +611,8 @@ public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile fil
 ```
 
 47. Q: How can you handle file downloads in Spring REST APIs?
-A: You can handle file downloads in Spring REST APIs by using the `ResponseEntity` class to set the appropriate response headers.
+    
+    A: You can handle file downloads in Spring REST APIs by using the `ResponseEntity` class to set the appropriate response headers.
 
 Example:
 ```java
@@ -581,7 +628,8 @@ public ResponseEntity<Resource> downloadFile() throws IOException {
 ```
 
 48. Q: What is the purpose of the `Pageable` interface in Spring REST?
-A: The `Pageable` interface in Spring REST is used to represent pagination information.
+    
+    A: The `Pageable` interface in Spring REST is used to represent pagination information.
 
 Example:
 ```java
@@ -594,7 +642,8 @@ public Page<User> getUsers(@RequestParam(defaultValue = "0") int page,
 ```
 
 49. Q: How can you implement versioning in Spring REST APIs?
-A: You can implement versioning in Spring REST APIs by using URL versioning, request header versioning, or content negotiation versioning.
+    
+    A: You can implement versioning in Spring REST APIs by using URL versioning, request header versioning, or content negotiation versioning.
 
 Example using URL versioning:
 ```java
@@ -644,7 +693,8 @@ public class UserController {
 ```
 
 50. Q: What is the purpose of the `PathMatcher` in Spring REST?
-A: The `PathMatcher` in Spring REST is used to match and extract URI template variables from request URIs.
+    
+    A: The `PathMatcher` in Spring REST is used to match and extract URI template variables from request URIs.
 
 Example:
 ```java

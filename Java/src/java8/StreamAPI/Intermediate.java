@@ -3,6 +3,9 @@ package java8.StreamAPI;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Intermediate
@@ -19,6 +22,13 @@ public class Intermediate {
             System.out.println(itr.previous());
         
         }
+        // Predicate
+        // import java.util.function.Function;
+        // Consumer 
+        // import java.util.function.BinaryOperator;
+
+        ConcurrentHashMap
+
 
 
     }

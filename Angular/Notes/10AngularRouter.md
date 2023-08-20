@@ -306,7 +306,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
-  template: '<p>Product ID: {{ productId }}</p>',
+  template: '
+  <p>Product ID: {{ productId }}</p>',
 })
 export class ProductComponent {
   productId: string;
@@ -316,6 +317,12 @@ export class ProductComponent {
   }
 }
 ```
+Another way of passing parameters
+
+```HTML
+<a  [routerLink]="['/router/productdetail',1,'keyboard',3000]">Load same component with same different data</a>
+```
+
 
 **5. What are query parameters in Angular Router? How do you access them?**
    - Answer: Query parameters are used to pass additional data in the URL as key-value pairs. They are denoted by a question mark followed by the parameter names and values. You can access query parameters using the `ActivatedRoute` service.
@@ -342,7 +349,161 @@ export class SearchComponent {
     this.query = this.route.snapshot.queryParams['q'];
   }
 }
+  To continously listen the changes in URL we have to subscribe the 
+// Another way 
+
+ ngOnInit(): void {
+    this.product.id=this.aroute.snapshot.params['id']
+    this.product.name=this.aroute.snapshot.params['name']
+    this.product.price=this.aroute.snapshot.params['price']
+
+  // for Continously subscribing the data
+    this.aroute.params.subscribe((data:Params)=>{
+
+      this.product.id=data['id']
+      this.product.name=data['name']
+      this.product.price=data['price']
+      console.log(data)
+      console.log(this.product)
+      console.log(this.product.id)
+      console.log(this.product.name)
+      console.log(this.product.price)
+    })
+
+  }
 ```
+
+  To continously listen the changes in URL we have to subscribe the 
+
+**7. explain query params and fragaments in angular router with example**
+
+  - Certainly! Let's go through examples of how to use query parameters and fragments in Angular Router.
+
+**Example: Query Parameters**
+
+Suppose you have an e-commerce application that displays a list of products and you want to allow users to click on a product to view its details on a separate page. You can use query parameters to pass the product ID from the list page to the details page.
+
+1. Define Routes:
+
+```typescript
+const routes: Routes = [
+  { path: 'products', component: ProductsComponent },
+  { path: 'product-details', component: ProductDetailsComponent },
+];
+```
+
+2. Navigate to Product Details with Query Parameter:
+
+```typescript
+import { Router } from '@angular/router';
+
+// ...
+
+constructor(private router: Router) {}
+
+navigateToProductDetails(productId: number) {
+  this.router.navigate(['product-details'], { queryParams: { id: productId } });
+}
+```
+
+3. Receive Query Parameter in Product Details Component:
+
+```typescript
+import { ActivatedRoute } from '@angular/router';
+
+// ...
+
+constructor(private route: ActivatedRoute) {}
+
+ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    const productId = +params['id'];
+    // Fetch product details using productId
+  });
+}
+```
+
+**Example: Fragments**
+
+Let's say you have a long page with multiple sections, and you want to provide links that scroll the user to a specific section when clicked.
+
+1. Define Route:
+
+```typescript
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+];
+```
+
+2. Scroll to a Section with Fragment:
+
+```typescript
+import { Router } from '@angular/router';
+
+// ...
+
+constructor(private router: Router) {}
+
+scrollToSection(sectionId: string) {
+  this.router.navigate(['home'], { fragment: sectionId });
+}
+```
+
+3. Use Fragments in HTML:
+
+In the `home.component.html` template, you have different sections:
+
+```html
+<section id="section1">
+  <!-- Content of section 1 -->
+</section>
+
+<section id="section2">
+  <!-- Content of section 2 -->
+</section>
+```
+
+**Putting it all together:**
+
+In the ProductsComponent template, you might have a list of products with links to their details:
+
+```html
+<ul>
+  <li *ngFor="let product of products">
+    <a (click)="navigateToProductDetails(product.id)">{{ product.name }}</a>
+  </li>
+</ul>
+```
+
+In the HomeComponent template, you could have links that scroll to specific sections:
+
+```html
+<a (click)="scrollToSection('section1')">Go to Section 1</a>
+<a (click)="scrollToSection('section2')">Go to Section 2</a>
+```
+
+And that's how you can use query parameters and fragments in Angular Router to pass data and control navigation behavior in your application.
+
+**8. Important**
+
+```typescript
+<a [routerLink]="['/router/productdetail',1,'kumaruu',2]" [queryParams]="{page:1,sort:'asc'}" [fragment]="'load'">Pass query paramets and fragaments through HTML</a>
+
+or 
+
+ productdetailwithqueryparams(pid:any,pname:any,pprice:any){
+
+    this.route.navigate(['router/productdetail',pid,pname,pprice],{queryParams:{page:1,sort:'asc',search:'iphone'},fragment:'load'});
+  
+  }
+
+  
+      // Retrieving Query Parameters
+    this.queryparamers=this.aroute.snapshot.queryParams
+    this.fragments=this.aroute.snapshot.fragment
+
+```
+
 
 **6. What is a route guard in Angular Router? How do you use it?**
    - Answer: A route guard is used to control access to routes based on certain conditions, such as user authentication or authorization. Angular provides various types of route guards, such as `CanActivate`, `CanActivateChild`, `CanDeactivate`, `Resolve`, and `CanLoad`.

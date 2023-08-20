@@ -1,0 +1,35 @@
+<p>product works!</p>
+<hr>
+
+<h1>Router Parameters</h1>
+<br>
+<div class="col-sm-6">
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Product ID</label>
+        <input type="text" class="form-control" #pid>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Product Name</label>
+        <input type="text" class="form-control" #pname>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Product price</label>
+        <input type="text" class="form-control" #pprice>
+      </div>
+      <button class="btn btn-primary" type="button" (click)="productdetail(pid.value,pname.value,pprice.value)">Pass to Product detail</button>
+</div>
+<hr>
+
+<h1>Query Params and fragments Parameters</h1>
+<br>
+
+<a [routerLink]="['/router/productdetail',1,'kumaruu',2]" [queryParams]="{page:1,sort:'asc'}" [fragment]="'load'">Pass query paramets and fragaments through HTML</a>
+
+<h4>Query Params and fragments Parameters through TS</h4>
+<br>
+    
+<button class="btn btn-primary" type="button" (click)="productdetailwithqueryparams(pid.value,pname.value,pprice.value)">Pass to Product detail with query params</button>
+
+
+
+
