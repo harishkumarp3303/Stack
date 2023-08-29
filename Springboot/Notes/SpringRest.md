@@ -142,6 +142,38 @@ public ResponseEntity<String> sayHello() {
 }
 ```
 
+14. Retrive httpheaders in springboot
+
+Certainly! The `@RequestHeader` annotation in Spring Boot is used to retrieve and bind a specific HTTP header value to a method parameter in a controller method. This annotation allows you to access header values without having to explicitly work with the `HttpServletRequest` object. Here's how you can use it:
+
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api")
+public class MyController {
+
+    @GetMapping("/headers")
+    public String getHeaders(
+            @RequestHeader("User-Agent") String userAgent,
+            @RequestHeader("Authorization") String authorization) {
+        // Process the headers as needed
+        // ...
+
+        return "Headers retrieved successfully!";
+    }
+}
+```
+
+In this example, the `getHeaders` method is annotated with `@GetMapping` to handle GET requests at the specified endpoint. The `@RequestHeader` annotation is then used to extract the values of the "User-Agent" and "Authorization" headers from the HTTP request and bind them to the `userAgent` and `authorization` method parameters, respectively.
+
+You can add as many `@RequestHeader` annotations as needed to retrieve different headers. The annotation's value parameter specifies the name of the header you want to retrieve.
+
+Remember to adjust the method signature and annotations according to your actual use case and the headers you need to retrieve.
+
 13. Q: How can you return different HTTP status codes in Spring REST?
     
     A: You can return different HTTP status codes in Spring REST by using the `ResponseEntity` class or by using the appropriate annotations such as `@ResponseStatus`.

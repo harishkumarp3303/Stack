@@ -619,3 +619,238 @@ export class MyFormComponent {
 In summary, `setValue` is used to set the complete value of a form control and requires all the values to be provided, while `patchValue` is used to update specific values of the form control and allows you to provide only the values you want to change without affecting the other controls. Choose the appropriate method based on your requirements when working with reactive forms in Angular.
 
 These are the top 20 Angular forms interview questions with answers and examples. Understanding Angular forms thoroughly is essential for building dynamic and interactive applications with user-friendly input validation.
+
+
+###############################################
+
+## 1. Template Driven Forms
+
+Template-driven forms are a way to handle form creation and validation in Angular applications by leveraging Angular's directives and two-way data binding within the component's template. They are particularly useful for creating simple forms with basic validation requirements and are known for their ease of use and quick development. Let's explore template-driven forms in more detail:
+
+**Key Concepts and Components of Template-Driven Forms:**
+
+1. **Form Tag (`<form>`):**
+   You start by encapsulating your form controls (input fields, selects, etc.) within an HTML `<form>` tag. This tag acts as a container for the form controls and provides access to the form's properties and methods.
+
+2. **`ngForm` Directive:**
+   The `ngForm` directive is used to create a reference to the form. It's automatically added to the `<form>` element and provides access to the form's state, validity, and submission events.
+
+3. **`ngModel` Directive:**
+   The `ngModel` directive enables two-way data binding between form controls and component properties. It allows data to flow both from the component to the view (displayed in the form controls) and from the view to the component (captured when users interact with the form controls).
+
+4. **Form Controls:**
+   Form controls are HTML elements like input fields, selects, and checkboxes that are used to collect user input. The `ngModel` directive is used to bind form controls to component properties.
+
+5. **Validation:**
+   Template-driven forms support basic validation using HTML attributes like `required`, `min`, `max`, `pattern`, etc. Angular automatically adds and removes CSS classes based on the control's validity.
+
+6. **Form Submission:**
+   Form submission is typically triggered by listening to the `(ngSubmit)` event on the `<form>` element. This event is bound to a method in the component that handles form submission.
+
+**Creating a Template-Driven Form:**
+
+**1. Template:**
+```html
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="user.name" required>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+```
+
+**2. Component:**
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-template-form',
+  templateUrl: './template-form.component.html',
+  styleUrls: ['./template-form.component.css']
+})
+export class TemplateFormComponent {
+  user = {
+    name: '',
+    email: ''
+  };
+
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log('Form submitted:', this.user);
+    }
+  }
+}
+```
+
+**Validation:**
+
+Template-driven forms provide basic validation out of the box using HTML attributes like `required`, `minlength`, `maxlength`, `pattern`, etc. Angular automatically adds CSS classes like `ng-invalid` and `ng-valid` based on the control's state.
+
+```html
+<input type="text" name="name" [(ngModel)]="user.name" required minlength="3">
+<div *ngIf="name.invalid && (name.dirty || name.touched)">
+  <div *ngIf="name.errors.required">Name is required.</div>
+  <div *ngIf="name.errors.minlength">Name must be at least 3 characters long.</div>
+</div>
+```
+
+**Benefits of Template-Driven Forms:**
+
+- **Simplicity and Rapid Development:** Template-driven forms are easy and quick to set up, making them suitable for smaller and simpler forms.
+
+- **Two-Way Data Binding:** `ngModel` provides an intuitive way to establish two-way data binding between form controls and component properties.
+
+- **Declarative Approach:** The form structure and validation rules are defined directly in the template, making it easy to understand.
+
+- **Less Complex Logic:** Ideal for simpler forms with basic validation requirements.
+
+**Limitations of Template-Driven Forms:**
+
+- **Limited Control:** Template-driven forms might become less flexible for complex forms with dynamic controls, custom validation logic, and advanced interaction.
+
+- **Testing:** Unit testing can be challenging due to the reliance on two-way data binding.
+
+In summary, template-driven forms are a great choice for creating straightforward forms with basic validation. However, for more complex forms that require dynamic behavior, advanced validation, and custom logic, reactive forms might be more suitable.
+
+### Nested forms 
+
+***ngModelGroup***
+
+`ngModelGroup` is a directive in Angular's template-driven forms that allows you to group form controls within a `FormGroup` without creating a separate form group instance in the component class. It's useful for organizing and structuring form controls in the template while maintaining the encapsulation and validation capabilities of Angular forms.
+
+With `ngModelGroup`, you can group related form controls together and apply validations to them as a whole. This is especially useful when you want to validate a subset of form controls without the need to create a nested `FormGroup` in the component code.
+
+**Usage of `ngModelGroup`:**
+
+Consider a scenario where you have a form that collects a user's name and contact information. You want to group the phone number inputs separately. Here's how you can use `ngModelGroup`:
+
+**HTML Template:**
+```html
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" ngModel required>
+  </div>
+  
+  <ng-container ngModelGroup="contact"> <!-- ngModelGroup directive -->
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" ngModel required>
+    </div>
+    <div>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" ngModel required>
+    </div>
+  </ng-container>
+  
+  <button type="submit">Submit</button>
+</form>
+```
+
+**Component:**
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-ng-model-group',
+  templateUrl: './ng-model-group.component.html',
+  styleUrls: ['./ng-model-group.component.css']
+})
+export class NgModelGroupComponent {
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log('Form submitted:', form.value);
+    }
+  }
+}
+```
+
+In this example, the `ngModelGroup` directive is used to group the email and phone number inputs under the "contact" group. This grouping allows you to encapsulate and validate these inputs together without creating a separate `FormGroup` instance in the component.
+
+**Advantages of `ngModelGroup`:**
+
+- **Structure and Readability:** `ngModelGroup` enhances the structure of your template by visually grouping related form controls together.
+
+- **Validation:** You can apply validation logic to the grouped controls as a unit without the need for an additional `FormGroup`.
+
+- **Simplicity:** `ngModelGroup` is especially useful for simpler forms where creating separate `FormGroup` instances might be overkill.
+
+- **Consistency:** It allows you to follow a similar structure to reactive forms when it comes to grouping related form controls.
+
+**Limitations of `ngModelGroup`:**
+
+- **Limited Complexity:** While `ngModelGroup` provides a way to group controls, it may not handle complex scenarios as efficiently as reactive forms, especially when dealing with dynamic controls or complex data structures.
+
+- **Reuse and Composition:** In more complex cases, using `FormGroup` instances might be preferable to achieve better code reuse and composability.
+
+In summary, `ngModelGroup` is a useful directive in template-driven forms that helps organize and group related form controls while still allowing for encapsulation and validation. It's a valuable tool for simpler forms where the use of separate `FormGroup` instances might be unnecessary.
+
+### setting default value for template driven forms
+
+In Angular, template-driven forms are a way to create forms using Angular's template syntax and directives. If you want to set values in template-driven forms, you can do so using the `ngModel` directive or other form-related directives. Here's a general process for setting values in template-driven forms:
+
+1. **Create the Form Elements**: In your template, create form elements like input fields, select boxes, etc., and use the `ngModel` directive to bind them to properties in your component.
+
+2. **Initialize Values**: You can initialize the values of these bound properties in your component's TypeScript code. This will set the initial values of the form fields.
+
+3. **Binding Form Elements**: By binding the properties in your component to the form elements using `ngModel`, any changes made to the form elements will automatically update the corresponding component properties, and vice versa.
+
+4. **Updating Values**: If you need to update the values programmatically, you can simply update the corresponding properties in your component, and the changes will be reflected in the template automatically.
+
+Here's a basic example:
+
+1. **HTML Template** (`my-form.component.html`):
+```html
+<form #myForm="ngForm">
+  <input type="text" name="username" [(ngModel)]="user.username">
+  <input type="email" name="email" [(ngModel)]="user.email">
+</form>
+<button (click)="setDefaultValues()">Set Default Values</button>
+```
+
+2. **Component TypeScript Code** (`my-form.component.ts`):
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html',
+})
+export class MyFormComponent {
+  user = {
+    username: '',
+    email: '',
+  };
+
+  setDefaultValues() {
+    this.user.username = 'exampleUser';
+    this.user.email = 'example@example.com';
+  }
+}
+```
+
+In this example, the `[(ngModel)]` directive binds the input fields to the properties `user.username` and `user.email`. The `setDefaultValues()` function in the component sets the default values for these properties, which will automatically update the input fields' values.
+
+Remember to import the `FormsModule` in your app's main module (`app.module.ts`) to use the `ngModel` directive:
+
+```typescript
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [...],
+  imports: [
+    FormsModule,
+    // ...
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+Keep in mind that while template-driven forms are easier to set up for simple forms, reactive forms provide more control and validation options for complex scenarios.
+

@@ -1,295 +1,295 @@
-In Angular, directives are powerful building blocks used to extend the functionality of HTML elements and enhance the behavior of the DOM. They are attributes or elements that add behavior or change the appearance of an element. Angular has three types of directives:
 
-1. **Component Directives:**
-Component directives are used to create custom reusable components with their templates, styles, and logic. They encapsulate the entire functionality of a part of the user interface and can be used throughout the application.
 
-Example:
-```typescript
-import { Component } from '@angular/core';
+**Directives** are a fundamental concept in Angular that allow you to extend or modify the behavior of HTML elements, attributes, and components. They essentially enable you to teach HTML new tricks or add extra functionality to it. Angular offers two main types of directives: structural directives and attribute directives.
 
-@Component({
-  selector: 'app-custom-button',
-  template: '<button>{{ label }}</button>',
-})
-export class CustomButtonComponent {
-  label = 'Click Me';
-}
-```
+### Structural Directives:
+
+Structural directives change the structure of the DOM by adding or removing elements based on conditions. They are prefixed with an asterisk (*) in the template.
+
+1. **ngIf**: Conditionally adds/removes elements based on a given condition.
+
+   ```html
+   <div *ngIf="showContent">Content is visible</div>
+   ```
+
+2. **ngFor**: Iterates over a collection and generates a template for each item.
+
+   ```html
+   <ul>
+     <li *ngFor="let item of items">{{ item }}</li>
+   </ul>
+   ```
+
+3. **ngSwitch**: Conditionally renders content based on the value of an expression.
+
+   ```html
+   <div [ngSwitch]="color">
+     <div *ngSwitchCase="'red'">Red</div>
+     <div *ngSwitchCase="'blue'">Blue</div>
+     <div *ngSwitchDefault>Unknown</div>
+   </div>
+   ```
+
+### Attribute Directives:
+
+Attribute directives modify the appearance or behavior of an existing element. They are applied using attributes on elements.
+
+1. **ngStyle**: Binds a set of CSS styles to an element based on conditions.
+
+   ```html
+   <div [ngStyle]="{'background-color': bgColor, 'font-size': fontSize + 'px'}">Styled Content</div>
+   ```
+
+2. **ngClass**: Adds or removes CSS classes based on conditions.
+
+   ```html
+   <div [ngClass]="{'highlight': isHighlighted, 'text-bold': isBold}">Styled Content</div>
+   ```
+
+3. **ngModel**: Two-way data binding for form controls.
+
+   ```html
+   <input [(ngModel)]="username">
+   ```
+
+4. **ngNonBindable**: Prevents Angular from compiling or evaluating the content.
+
+   ```html
+   <div ngNonBindable>{{ someAngularExpression }}</div>
+   ```
+
+### Custom Directives:
+
+You can also create your own custom directives in Angular to extend its capabilities according to your needs.
+
+1. **Attribute Directive**: Modifies the behavior or appearance of an element.
+
+   ```typescript
+   @Directive({
+     selector: '[appHighlight]'
+   })
+   export class HighlightDirective {
+     @HostListener('mouseenter') onMouseEnter() {
+       // Add logic for mouse enter event
+     }
+   }
+   ```
+
+   ```html
+   <div appHighlight>Hover me</div>
+   ```
+
+2. **Structural Directive**: Changes the structure of the DOM.
+
+   ```typescript
+   @Directive({
+     selector: '[appUnless]'
+   })
+   export class UnlessDirective {
+     constructor(private templateRef: TemplateRef<any>, private vcRef: ViewContainerRef) {}
+
+     @Input() set appUnless(condition: boolean) {
+       if (!condition) {
+         this.vcRef.createEmbeddedView(this.templateRef);
+       } else {
+         this.vcRef.clear();
+       }
+     }
+   }
+   ```
+
+   ```html
+   <div *appUnless="showContent">Hide me</div>
+   ```
+
+# QNA
+
+Of course, here are some Angular directives interview questions along with answers and examples:
+
+**Question 1: What are directives in Angular?**
+
+**Answer:** Directives in Angular are markers on a DOM element that instruct Angular to attach specified behavior or transform the element and its children. They can be classified into structural directives (altering DOM layout) and attribute directives (changing the appearance or behavior of an element).
+
+**Question 2: Provide an example of the `ngIf` directive and explain its use case.**
+
+**Answer:** The `ngIf` directive is used for conditional rendering. It adds or removes elements from the DOM based on a condition.
+
+**Example:**
 ```html
-<app-custom-button></app-custom-button>
+<div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
 ```
 
-2. **Attribute Directives:**
-Attribute directives are used to change the appearance or behavior of an existing HTML element. They are applied as attributes to the element and are activated through binding.
+**Question 3: How can you use the `ngFor` directive?**
 
-Example:
+**Answer:** The `ngFor` directive is used for looping through collections and rendering templates for each item.
+
+**Example:**
+```html
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+```
+
+**Question 4: What is the `ngStyle` directive, and when would you use it?**
+
+**Answer:** The `ngStyle` directive is used to dynamically apply CSS styles to elements based on conditions.
+
+**Example:**
+```html
+<div [ngStyle]="{'background-color': bgColor, 'font-size': fontSize + 'px'}">Styled Content</div>
+```
+
+**Question 5: Can you create custom directives in Angular? If so, how?**
+
+**Answer:** Yes, you can create custom directives using the `@Directive` decorator. They can be attribute directives (modifying the behavior or appearance) or structural directives (changing the structure of the DOM).
+
+**Example of an Attribute Directive:**
 ```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
-
 @Directive({
-  selector: '[appHighlight]',
+  selector: '[appHighlight]'
 })
 export class HighlightDirective {
-  constructor(private el: ElementRef) { }
-
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.highlight('yellow');
+  @HostListener('mouseenter') onMouseEnter() {
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', 'yellow');
   }
 
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.highlight(null);
+  @HostListener('mouseleave') onMouseLeave() {
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', null);
   }
 
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
-  }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 }
 ```
 ```html
-<p appHighlight>Mouse over this text to see the effect.</p>
+<div appHighlight>Hover me</div>
 ```
 
-3. **Structural Directives:**
-Structural directives are used to modify the structure of the DOM by adding or removing elements based on conditions. They are typically applied using a template syntax.
+**Question 6: Explain the purpose of the `ngModel` directive.**
 
-Example of `ngIf` (Conditional Rendering):
+**Answer:** The `ngModel` directive is used for two-way data binding in forms. It binds the value of an input element to a property in the component and also reflects changes back to the input element.
+
+**Example:**
 ```html
-<div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
+<input [(ngModel)]="username">
 ```
 
-Example of `ngFor` (List Rendering):
+**Question 7: What is the role of the `ngNonBindable` directive?**
+
+**Answer:** The `ngNonBindable` directive prevents Angular from compiling or evaluating the content within its scope. It's useful when you want to display Angular-specific syntax as plain text.
+
+**Example:**
 ```html
-<ul>
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
+<div ngNonBindable>{{ someAngularExpression }}</div>
 ```
 
-These are the three types of directives in Angular. Directives are essential for creating dynamic and interactive applications as they enable you to manipulate the DOM and extend HTML with custom behaviors and logic.
+**Question 8: How can directives contribute to code reusability in Angular?**
 
-Certainly! Here are some Angular interview questions specifically related to directives:
+**Answer:** Directives allow you to encapsulate and reuse behavior, styling, or functionality across different parts of an application. This promotes cleaner code, easier maintenance, and consistent user experience.
 
-1. **What are directives in Angular?**
-Answer: In Angular, directives are instructions that extend the behavior of HTML elements or change their appearance. There are three types of directives: Component directives, Attribute directives, and Structural directives.
+**Question 9: Can you explain the lifecycle hooks of a custom directive?**
 
-2. **Differentiate between component directives and attribute directives in Angular.**
-Answer: 
-- Component directives are used to create custom reusable components with their templates, styles, and logic. They encapsulate the entire functionality of a part of the user interface and can be used throughout the application.
-- Attribute directives are used to change the appearance or behavior of an existing HTML element. They are applied as attributes to the element and are activated through binding.
+**Answer:** Custom directives have lifecycle hooks such as `ngOnInit`, `ngOnChanges`, and `ngOnDestroy`. For example, `ngOnInit` is called when the directive is initialized, and `ngOnChanges` is called when any bound input properties change.
 
-3. **How do you create a custom directive in Angular?**
-Answer: To create a custom directive in Angular, you need to use the `@Directive` decorator. You can then implement the directive's logic in the class.
+Absolutely, here are some more Angular directives interview questions along with answers and examples:
 
-Example:
+**Question 10: Explain the difference between `ngClass` and `ngStyle` directives.**
+
+**Answer:** Both `ngClass` and `ngStyle` allow you to dynamically apply styles, but `ngClass` is used for adding/removing CSS classes based on conditions, while `ngStyle` is used for applying inline CSS styles.
+
+**Example of `ngClass`:**
+```html
+<div [ngClass]="{'highlight': isHighlighted, 'text-bold': isBold}">Styled Content</div>
+```
+
+**Question 11: Can you provide an example of creating a custom structural directive?**
+
+**Answer:** Sure! Here's an example of a custom structural directive that conditionally displays content based on the value of a variable.
+
+**Example of a Custom Structural Directive:**
 ```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
-
 @Directive({
-  selector: '[appHighlight]',
+  selector: '[appIf]'
 })
-export class HighlightDirective {
-  constructor(private el: ElementRef) { }
+export class IfDirective {
+  constructor(private templateRef: TemplateRef<any>, private vcRef: ViewContainerRef) {}
 
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.highlight('yellow');
-  }
-
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.highlight(null);
-  }
-
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
+  @Input() set appIf(condition: boolean) {
+    if (condition) {
+      this.vcRef.createEmbeddedView(this.templateRef);
+    } else {
+      this.vcRef.clear();
+    }
   }
 }
 ```
 ```html
-<p appHighlight>Mouse over this text to see the effect.</p>
+<div *appIf="showContent">Content is visible</div>
 ```
 
-4. **What are structural directives in Angular? Provide examples of two structural directives.**
-Answer: Structural directives are used to modify the structure of the DOM by adding or removing elements based on conditions. They are typically applied using a template syntax. Two examples of structural directives are `ngIf` and `ngFor`.
+**Question 12: How can you pass data from a parent component to a custom directive?**
 
-Example of `ngIf` (Conditional Rendering):
-```html
-<div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
-```
+**Answer:** You can pass data to a custom directive using input properties.
 
-Example of `ngFor` (List Rendering):
-```html
-<ul>
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
-```
-
-5. **Explain the purpose of `ngFor` directive and how it works.**
-Answer: The `ngFor` directive is a structural directive used for list rendering. It iterates over a collection (e.g., an array) and renders a template for each item in the collection. The `ngFor` directive uses the `let` syntax to create a local variable for each item in the loop.
-
-Example:
+**Example:**
 ```typescript
-items = ['Apple', 'Banana', 'Orange'];
-```
-```html
-<ul>
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
-```
-
-6. **What is the purpose of `ngIf` directive in Angular?**
-Answer: The `ngIf` directive is a structural directive used for conditional rendering. It conditionally adds or removes elements from the DOM based on the truthiness of the expression provided to it.
-
-Example:
-```html
-<div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
-```
-
-7. **How do you pass data from a parent component to a custom directive?**
-Answer: To pass data from a parent component to a custom directive, you can use directive input properties. In the directive class, define the input property using the `@Input` decorator. Then, bind the data to the directive's input property in the template of the parent component.
-
-Example:
-```typescript
-import { Directive, Input } from '@angular/core';
-
 @Directive({
-  selector: '[appCustomDirective]',
+  selector: '[appCustom]'
 })
 export class CustomDirective {
-  @Input() appCustomDirective: string;
-}
-```
-```html
-<div [appCustomDirective]="someData"></div>
-```
+  @Input() appCustom: string;
 
-8. **What is the difference between a structural directive and an attribute directive?**
-Answer: The main difference between a structural directive and an attribute directive is that structural directives modify the structure of the DOM by adding or removing elements, while attribute directives modify the behavior or appearance of existing elements.
-
-9. **Explain the concept of "HostListener" in Angular and its role in custom directives.**
-Answer: `HostListener` is a decorator in Angular that allows you to listen for events on the host element of a directive. It enables you to define methods that will be executed when specific events occur on the element to which the directive is applied. It is commonly used in custom attribute directives to respond to user interactions.
-
-Example:
-```typescript
-import { Directive, HostListener } from '@angular/core';
-
-@Directive({
-  selector: '[appCustomDirective]',
-})
-export class CustomDirective {
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent) {
-    // Handle click event
-  }
-}
-```
-
-These questions cover the fundamental concepts and usage of directives in Angular. Being familiar with directives is crucial for creating dynamic and interactive web applications using Angular.
-
-Sure! Here are some Angular interview questions specifically related to directives:
-
-1. **What are directives in Angular?**
-Answer: Directives are attributes or elements that extend the functionality of HTML elements and enhance the behavior of the DOM. They are a way to manipulate the DOM, apply custom styles, and add behavior to elements. Angular has three types of directives: Component directives, Attribute directives, and Structural directives.
-
-2. **What is the difference between component directives and attribute directives?**
-Answer: Component directives are used to create custom reusable components with their templates, styles, and logic. They encapsulate the entire functionality of a part of the user interface. Attribute directives, on the other hand, are used to change the appearance or behavior of an existing HTML element. They are applied as attributes to the element and are activated through binding.
-
-3. **How do you create a custom attribute directive in Angular?**
-Answer: To create a custom attribute directive in Angular, you need to define a TypeScript class with the `@Directive` decorator. The directive class should include the logic that manipulates the DOM or changes the behavior of the element.
-
-Example:
-```typescript
-import { Directive, ElementRef, HostListener } from '@angular/core';
-
-@Directive({
-  selector: '[appHighlight]',
-})
-export class HighlightDirective {
-  constructor(private el: ElementRef) { }
-
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.highlight('yellow');
-  }
-
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.highlight(null);
-  }
-
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
+  constructor(private el: ElementRef) {
+    el.nativeElement.textContent = this.appCustom;
   }
 }
 ```
 ```html
-<p appHighlight>Mouse over this text to see the effect.</p>
+<div appCustom="Hello from directive"></div>
 ```
 
-4. **What are structural directives in Angular? Provide examples.**
-Answer: Structural directives are used to modify the structure of the DOM by adding or removing elements based on conditions. They are applied using a template syntax and include directives like `ngIf`, `ngFor`, and `ngSwitch`.
+**Question 13: What is the purpose of the `@HostListener` decorator in custom directives?**
 
-Example of `ngIf` (Conditional Rendering):
-```html
-<div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
-```
+**Answer:** The `@HostListener` decorator is used to listen to events on the host element of the directive and respond with specific actions.
 
-Example of `ngFor` (List Rendering):
-```html
-<ul>
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
-```
-
-5. **Explain the purpose of `ngIf` and `ngFor` directives.**
-Answer: `ngIf` is used for conditional rendering, meaning it displays the associated element or template only if the provided expression is true. `ngFor` is used for rendering multiple elements or templates by iterating over a collection.
-
-6. **How do you pass data from a component to a directive?**
-Answer: You can pass data from a component to a directive using input properties. In the directive's TypeScript class, you can define an `@Input` property, which will receive the data from the component. The component can then bind to this property using attribute binding.
-
-Example:
-```typescript
-// Directive
-import { Directive, Input } from '@angular/core';
-
-@Directive({
-  selector: '[appCustomDirective]',
-})
-export class CustomDirective {
-  @Input() customData: string;
-}
-
-// Component
-@Component({
-  selector: 'app-my-component',
-  template: '<div [appCustomDirective]="data"></div>',
-})
-export class MyComponent {
-  data = 'Data from the component';
-}
-```
-
-7. **Explain the use of the `@HostListener` decorator in a directive.**
-Answer: The `@HostListener` decorator in a directive is used to listen to events raised by the host element (the element to which the directive is applied). It allows you to respond to those events and execute the specified code in the directive class.
-
-Example:
+**Example:**
 ```typescript
 @Directive({
-  selector: '[appCustomDirective]',
+  selector: '[appClick]'
 })
-export class CustomDirective {
+export class ClickDirective {
   @HostListener('click', ['$event'])
   onClick(event: Event) {
-    console.log('Element clicked!');
+    alert('Element clicked');
   }
 }
 ```
 ```html
-<button appCustomDirective>Click me</button>
+<div appClick>Click me</div>
 ```
 
-8. **What is the difference between a structural directive and an attribute directive?**
-Answer: The main difference between structural and attribute directives is in their usage. Structural directives modify the structure of the DOM by adding or removing elements based on conditions, while attribute directives modify the behavior or appearance of existing elements by manipulating their attributes or properties.
+**Question 14: How do you use the `Renderer2` service in custom directives?**
 
-These are some common Angular interview questions related to directives. Understanding directives is crucial for developing interactive and dynamic user interfaces in Angular applications.
+**Answer:** The `Renderer2` service provides an abstraction for manipulating the DOM. It's used to modify element properties and styles in a way that's safe for both client-side and server-side rendering.
+
+**Example:**
+```typescript
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', 'yellow');
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', null);
+  }
+}
+```
+```html
+<div appHighlight>Hover me</div>
+```
+
+

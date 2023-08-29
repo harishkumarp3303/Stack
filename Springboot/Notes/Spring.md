@@ -1,3 +1,316 @@
+## DI
+
+Dependency Injection (DI) in Spring is a design pattern and core concept that addresses how components in an application acquire their dependencies. It's a way to achieve loose coupling between different parts of your application, making them more modular, easier to test, and more maintainable.
+
+In a Spring application, DI is achieved through the Spring IoC (Inversion of Control) container, which manages the creation, configuration, and assembly of objects (beans). Instead of a component creating its dependencies, the dependencies are "injected" into the component from the outside.
+
+Here's a breakdown of how dependency injection works in Spring:
+
+1. **Components and Beans:**
+   - Components are Java classes managed by the Spring container.
+   - Beans are instances of components managed by the Spring container.
+   - Beans represent objects that are created, configured, and managed by Spring.
+
+2. **Types of Dependency Injection in Spring:**
+   - **Constructor Injection:** Dependencies are provided through a constructor.
+   - **Setter Injection:** Dependencies are provided through setter methods.
+   - **Field Injection:** Dependencies are directly injected into fields (using annotations).
+
+3. **Annotations:**
+   - `@Autowired`: Used to automatically inject dependencies.
+   - `@Component`, `@Service`, `@Repository`, etc.: Used to mark classes as Spring-managed components.
+
+4. **Configuration:**
+   - Spring Boot's component scanning automatically detects components and beans in your application package and sub-packages.
+   - XML-based configuration can also be used to define beans and their relationships, but it's less common with Spring Boot.
+
+5. **Advantages of Dependency Injection in Spring:**
+   - **Modularity:** Components can be developed, tested, and maintained independently.
+   - **Flexibility:** Dependencies can be easily replaced or updated without affecting other parts of the application.
+   - **Testability:** Components can be tested in isolation by providing mock dependencies.
+   - **Reduced Code Duplication:** Common dependencies can be reused across multiple components.
+
+Here's a simple example of dependency injection in Spring:
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+In this example, the `Car` component has a dependency on the `Engine` component. The `@Autowired` annotation on the `Car` constructor tells Spring to inject an instance of `Engine` when creating a `Car` bean.
+
+Overall, dependency injection in Spring promotes a more organized, modular, and maintainable codebase by allowing components to focus on their core functionality while leaving the management of dependencies to the Spring framework.
+
+## Types of DI
+
+Sure, let's go through examples of each type of dependency injection using a simple Java class scenario.
+
+Assume we have a `Car` class that depends on an `Engine` object. We'll explore how constructor injection, setter injection, and field injection would work in this context.
+
+1. **Constructor Injection:**
+In this approach, the dependency (`Engine` object) is injected through the constructor of the `Car` class. Once the `Car` object is created, it will always have a valid `Engine` dependency.
+
+```java
+public class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+
+public class Engine {
+    public void start() {
+        System.out.println("Engine started!");
+    }
+}
+
+// Usage
+Engine carEngine = new Engine();
+Car myCar = new Car(carEngine);
+myCar.start();
+```
+
+2. **Setter Injection:**
+In this approach, the dependency (`Engine` object) is injected through a setter method after the `Car` object has been created. This allows flexibility in changing the `Engine` at runtime.
+
+```java
+public class Car {
+    private Engine engine;
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+
+// Usage
+Car myCar = new Car();
+Engine carEngine = new Engine();
+myCar.setEngine(carEngine);
+myCar.start();
+```
+
+3. **Field Injection:**
+In field injection, the `Engine` dependency is directly injected into the private field of the `Car` class. This is often managed by a dependency injection framework, which handles the injection behind the scenes.
+
+```java
+public class Car {
+    @Inject  // This annotation indicates field injection (using a hypothetical DI framework)
+    private Engine engine;
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+
+public class Engine {
+    public void start() {
+        System.out.println("Engine started!");
+    }
+}
+
+// Usage (assuming a DI framework handles injection)
+Car myCar = new Car();
+myCar.start();
+```
+
+In these examples, you can see the differences between the three types of dependency injection:
+
+- **Constructor Injection:** Dependencies are injected through the constructor, ensuring that the `Car` class always has a valid `Engine` dependency from the start.
+
+- **Setter Injection:** Dependencies are injected through setter methods, allowing flexibility in changing the dependency after object creation.
+
+- **Field Injection:** Dependencies are directly injected into class fields, often managed by a dependency injection framework. This approach can result in more concise code but might lead to issues with testing and control over dependency changes.
+
+The choice between these approaches depends on factors like the desired level of flexibility, immutability of dependencies, and maintainability of the codebase.
+
+## DI with Springboot
+
+Absolutely, in modern Spring applications, dependency injection can be managed using Java-based configuration (often referred to as "JavaConfig") instead of XML. Let's explore constructor injection, setter injection, and field injection using examples in Spring with JavaConfig.
+
+Assume we have a Spring application with a `Car` class that depends on an `Engine` object.
+
+1. **Constructor Injection:**
+In constructor injection, dependencies are provided through the constructor of a class. In Spring, you can use the `@Autowired` annotation on the constructor.
+
+```java
+public class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+2. **Setter Injection:**
+Setter injection involves providing dependencies through setter methods, annotated with `@Autowired`.
+
+```java
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+3. **Field Injection:**
+Field injection directly injects dependencies into fields using the `@Autowired` annotation on the field.
+
+```java
+public class Car {
+    @Autowired
+    private Engine engine;
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+Here's how you can configure these examples using JavaConfig:
+
+1. **Constructor Injection:**
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+    // No explicit bean configuration needed when using @ComponentScan
+}
+```
+
+```java
+@Component
+public class Engine {
+    public void start() {
+        System.out.println("Engine started!");
+    }
+}
+
+@Component
+public class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+2. **Setter Injection:**
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+    // No explicit bean configuration needed when using @ComponentScan
+}
+```
+
+```java
+@Component
+public class Engine {
+    public void start() {
+        System.out.println("Engine started!");
+    }
+}
+
+@Component
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+3. **Field Injection:**
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+    // No explicit bean configuration needed when using @ComponentScan
+}
+```
+
+```java
+@Component
+public class Engine {
+    public void start() {
+        System.out.println("Engine started!");
+    }
+}
+
+@Component
+public class Car {
+    @Autowired
+    private Engine engine;
+
+    public void start() {
+        engine.start();
+        System.out.println("Car started!");
+    }
+}
+```
+
+In each case, the `@ComponentScan` annotation in the `AppConfig` class instructs Spring to scan for components and perform the appropriate dependency injection. The `@Autowired` annotation is used to signal that Spring should inject the required dependencies. The choice between these injection methods remains similar to the explanations provided earlier.
+
 Sure! Here is a comprehensive list of Spring interview questions along with answers and examples:
 
 1. What is the Spring Framework?

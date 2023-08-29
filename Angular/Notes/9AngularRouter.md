@@ -109,6 +109,147 @@ const routes: Routes = [
 **7. Route Guards:**
 Route guards are used to control access to routes based on certain conditions. There are several types of route guards, such as `CanActivate`, `CanActivateChild`, `CanDeactivate`, `Resolve`, and `CanLoad`. You can implement custom logic in these guards to protect certain routes or perform actions before a route is loaded.
 
+Certainly! Let's go through each type of route guard with implementation examples.
+
+Assuming you have an Angular application with the following components: `HomeComponent`, `ProfileComponent`, and `AdminComponent`.
+
+1. **CanActivate:**
+   The `CanActivate` guard is used to prevent unauthorized users from accessing a route. Let's say you want to protect the `ProfileComponent` route so that only authenticated users can access it.
+
+   ```typescript
+   import { Injectable } from '@angular/core';
+   import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+   import { AuthService } from './auth.service'; // Assume you have an AuthService for authentication
+
+   @Injectable({
+     providedIn: 'root'
+   })
+   export class AuthGuard implements CanActivate {
+     constructor(private authService: AuthService, private router: Router) {}
+
+     canActivate(
+       next: ActivatedRouteSnapshot,
+       state: RouterStateSnapshot): boolean | UrlTree {
+       if (this.authService.isAuthenticated()) {
+         return true;
+       } else {
+         // Redirect to login page if not authenticated
+         return this.router.createUrlTree(['/login']);
+       }
+     }
+   }
+   ```
+
+   In your route configuration:
+
+   ```typescript
+   const routes: Routes = [
+     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+     // ...
+   ];
+   ```
+
+2. **CanActivateChild:**
+   Let's say you have an admin section with child routes (`AdminDashboardComponent` and `AdminSettingsComponent`) that should only be accessible to authenticated users with admin roles.
+
+   ```typescript
+   @Injectable({
+     providedIn: 'root'
+   })
+   export class AdminAuthGuard implements CanActivateChild {
+     constructor(private authService: AuthService, private router: Router) {}
+
+     canActivateChild(
+       childRoute: ActivatedRouteSnapshot,
+       state: RouterStateSnapshot): boolean | UrlTree {
+       if (this.authService.isAuthenticated() && this.authService.isAdmin()) {
+         return true;
+       } else {
+         // Redirect to login page or access denied page
+         return this.router.createUrlTree(['/login']);
+       }
+     }
+   }
+   ```
+
+   In your route configuration:
+
+   ```typescript
+   const routes: Routes = [
+     {
+       path: 'admin',
+       canActivateChild: [AdminAuthGuard],
+       children: [
+         { path: 'dashboard', component: AdminDashboardComponent },
+         { path: 'settings', component: AdminSettingsComponent },
+       ]
+     },
+     // ...
+   ];
+   ```
+
+3. **CanDeactivate:**
+   Let's say you want to prevent users from leaving the `ProfileComponent` if they have unsaved changes.
+
+   ```typescript
+   @Injectable({
+     providedIn: 'root'
+   })
+   export class CanDeactivateGuard implements CanDeactivate<ProfileComponent> {
+     canDeactivate(
+       component: ProfileComponent,
+       currentRoute: ActivatedRouteSnapshot,
+       currentState: RouterStateSnapshot,
+       nextState?: RouterStateSnapshot): boolean {
+       if (component.hasUnsavedChanges()) {
+         return window.confirm('You have unsaved changes. Do you really want to leave?');
+       }
+       return true;
+     }
+   }
+   ```
+
+   In your route configuration:
+
+   ```typescript
+   const routes: Routes = [
+     { path: 'profile', component: ProfileComponent, canDeactivate: [CanDeactivateGuard] },
+     // ...
+   ];
+   ```
+
+4. **CanLoad:**
+   Let's say you have a module `AdminModule` that should only be loaded if the user is authenticated and has admin roles.
+
+   ```typescript
+   @Injectable({
+     providedIn: 'root'
+   })
+   export class CanLoadAdminModuleGuard implements CanLoad {
+     constructor(private authService: AuthService, private router: Router) {}
+
+     canLoad(route: Route): boolean {
+       if (this.authService.isAuthenticated() && this.authService.isAdmin()) {
+         return true;
+       } else {
+         // Redirect to login page or access denied page
+         return this.router.createUrlTree(['/login']);
+       }
+     }
+   }
+   ```
+
+   In your route configuration:
+
+   ```typescript
+   const routes: Routes = [
+     { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canLoad: [CanLoadAdminModuleGuard] },
+     // ...
+   ];
+   ```
+
+Remember that these are just simplified examples to illustrate the concepts. In a real-world application, you might have more complex scenarios and additional checks in your guards.
+
 **8. Lazy Loading:**
 Lazy loading is a technique where you load modules only when they are needed, rather than loading the entire application upfront. This can significantly improve initial page load time. You can use the `loadChildren` property to lazy load modules.
 

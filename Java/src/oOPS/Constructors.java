@@ -72,3 +72,4 @@ public class Constructors {
 // Ans:
 
 // Yes, a constructor can be declared private. A private constructor is used in restricting object creation.
+

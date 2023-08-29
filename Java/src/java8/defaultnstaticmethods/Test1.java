@@ -1,4 +1,4 @@
-package java8.defaultmethods;
+package java8.defaultnstaticmethods;
 
 public class Test1 {
 	

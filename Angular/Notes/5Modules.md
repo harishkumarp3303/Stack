@@ -245,6 +245,44 @@ Sure, let's go through some common interview questions related to Angular module
    }
    ```
 
+`forRoot` and `forChild` are two methods commonly used in Angular when setting up and configuring feature modules within an Angular application. They are used in the context of Angular's NgModule system to manage the configuration and instantiation of services, components, and other artifacts provided by modules.
+
+Here's what each of these methods does:
+
+1. **forRoot:**
+   The `forRoot` method is typically used in the root module of an application (like `AppModule`). This method is used to import and configure a module along with its services and other providers that should be available application-wide. When you call `forRoot` on a module, you provide the configuration for that module. This is where you might configure services that have a single instance shared across the entire application.
+
+   Example:
+   ```typescript
+   @NgModule({
+     imports: [
+       CommonModule,
+       SharedModule.forRoot(), // Configuration for shared services
+     ],
+     declarations: [AppComponent],
+   })
+   export class AppModule {}
+   ```
+
+2. **forChild:**
+   The `forChild` method is used for feature modules, which are intended to be lazy-loaded or used in specific parts of the application. These modules might have their own services and components that are only relevant within a certain part of the application. When you call `forChild` on a module, you configure the module specifically for that part of the application, usually providing separate instances of services that are scoped to that feature module.
+
+   Example:
+   ```typescript
+   @NgModule({
+     imports: [
+       CommonModule,
+       FeatureModule.forChild(), // Configuration for feature-specific services
+     ],
+   })
+   export class FeatureRoutingModule {}
+   ```
+
+In summary:
+- `forRoot` is used in the root module to configure and provide application-wide services and settings.
+- `forChild` is used in feature modules or lazy-loaded modules to configure services and settings specific to that module's scope.
+
+By using these methods, you can effectively manage the configuration and availability of services and other providers within your Angular application. This separation helps in maintaining a modular and organized architecture.
 10. **How do you import a module into another module in Angular?**
     - **Answer:** To import a module into another module, you add it to the `imports` array of the target module.
 

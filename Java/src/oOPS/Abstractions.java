@@ -41,17 +41,17 @@ abstract class Dog implements Animal{
     }
 }
 
-class Labrador extends Dog{
+// class Labrador extends Dog{
 
-    public void eat(){
+//     public void eat(){
         
-    }
+//     }
 
-}
+// }
 public class Abstractions {
     
-    public static void main(String[] args) {
-        Labrador l=new Labrador();
-        l.eat();
-    }
+    // public static void main(String[] args) {
+    //     Labrador l=new Labrador();
+    //     l.eat();
+    // }
 }

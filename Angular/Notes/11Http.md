@@ -34,6 +34,85 @@ Certainly, here's a list of 20 top Angular HTTP interview questions along with a
    
    **Answer:** HTTP Interceptors allow you to intercept and modify HTTP requests and responses globally across your application. They are useful for tasks like adding authentication headers, logging, or error handling. You can create an interceptor by implementing the `HttpInterceptor` interface.
 
+   In Angular, HTTP Interceptors are a powerful feature that allow you to intercept and manipulate HTTP requests and responses at a global level. They provide a way to add common functionality, such as headers, authentication, error handling, and logging, to your HTTP requests and responses without needing to modify each individual service that makes HTTP calls.
+
+Here's how you can use HTTP Interceptors in Angular:
+
+1. **Creating an Interceptor:**
+   To create an HTTP Interceptor, you'll need to implement the `HttpInterceptor` interface and provide implementation for the `intercept` method. This method is called for each HTTP request and response.
+
+   ```typescript
+   import { Injectable } from '@angular/core';
+   import {
+     HttpInterceptor,
+     HttpRequest,
+     HttpHandler,
+     HttpEvent
+   } from '@angular/common/http';
+   import { Observable } from 'rxjs';
+
+   @Injectable()
+   export class MyInterceptor implements HttpInterceptor {
+     intercept(
+       request: HttpRequest<any>,
+       next: HttpHandler
+     ): Observable<HttpEvent<any>> {
+       // You can manipulate the request here (e.g., adding headers)
+       const modifiedRequest = request.clone({
+         setHeaders: {
+           Authorization: 'Bearer myAccessToken'
+         }
+       });
+
+       return next.handle(modifiedRequest);
+     }
+   }
+   ```
+
+2. **Registering the Interceptor:**
+   Interceptors need to be registered in your Angular application's providers array. You can do this in your `AppModule` or a feature module. The order of registration matters, as interceptors are executed in the order they are provided.
+
+   ```typescript
+   import { NgModule } from '@angular/core';
+   import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+   import { MyInterceptor } from './my-interceptor';
+
+   @NgModule({
+     imports: [HttpClientModule],
+     providers: [
+       {
+         provide: HTTP_INTERCEPTORS,
+         useClass: MyInterceptor,
+         multi: true
+       }
+     ]
+   })
+   export class AppModule {}
+   ```
+
+   In the example above, the `MyInterceptor` class is registered as an interceptor in the `HTTP_INTERCEPTORS` token.
+
+3. **Using Interceptor in HTTP Requests:**
+   Once registered, the interceptor's `intercept` method will be called automatically for every outgoing HTTP request. You can use the `next.handle` method to continue the request and pass it through the interceptor chain.
+
+   ```typescript
+   import { Injectable } from '@angular/core';
+   import { HttpClient } from '@angular/common/http';
+
+   @Injectable()
+   export class MyService {
+     constructor(private http: HttpClient) {}
+
+     fetchData() {
+       return this.http.get('/api/data'); // The interceptor will add headers before sending
+     }
+   }
+   ```
+
+With this setup, the `MyInterceptor` will be invoked for every HTTP request made by the application. You can use this to handle common tasks like adding authentication tokens, handling errors, or logging.
+
+Keep in mind that interceptors are a powerful tool, but their usage should be carefully considered to avoid unintended side effects or conflicts with other interceptors.
+
 **5. How do you handle errors in Angular HTTP requests?**
    
    **Answer:** You can handle errors in HTTP requests using the `catchError` operator along with the `throwError` function from the `rxjs` library. Here's an example:

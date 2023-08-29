@@ -1072,7 +1072,44 @@ Certainly! Here are 80 Java collections interview questions:
    List<String> unmodifiableList = Collections.unmodifiableList(myList);
    Set<String> unmodifiableSet = Collections.unmodifiableSet(mySet);
    Map<String, Integer> unmodifiableMap = Collections.unmodifiableMap(myMap);
+
    ```
+
+   Unmodifiable collections in Java are collections (lists, sets, maps, etc.) that are designed to be read-only. Once an unmodifiable collection is created, its content cannot be modified. This can be useful when you want to provide a view of a collection that prevents accidental modification, ensuring data integrity and immutability. Java provides utility methods to create unmodifiable views of existing collections.
+
+Here's an example of using unmodifiable collections:
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class UnmodifiableCollectionsExample {
+    public static void main(String[] args) {
+        List<String> mutableList = new ArrayList<>();
+        mutableList.add("Apple");
+        mutableList.add("Banana");
+        mutableList.add("Cherry");
+
+        // Create an unmodifiable view of the mutableList
+        List<String> unmodifiableList = Collections.unmodifiableList(mutableList);
+
+        // This will throw an UnsupportedOperationException
+        try {
+            unmodifiableList.add("Durian");
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Attempted to modify unmodifiable list");
+        }
+
+        // Print the contents of the unmodifiable list
+        System.out.println("Unmodifiable List: " + unmodifiableList);
+    }
+}
+```
+
+In this example, we first create a mutable `ArrayList` called `mutableList`. Then, we create an unmodifiable view of this list using `Collections.unmodifiableList(mutableList)`. When we attempt to add an element to the unmodifiable list, it throws an `UnsupportedOperationException`, preventing the modification of the list.
+
+Unmodifiable collections are particularly useful when you want to share data without allowing external code to modify it. They can be used to ensure data integrity and avoid accidental modifications in scenarios where immutability is desired. Keep in mind that while the unmodifiable view prevents direct modifications, it doesn't prevent changes to the original mutable collection.
 
 77. How do you reverse the order of elements in a list in Java?
     - Answer: You can use the `Collections.reverse()` method to reverse the order of elements in a list.
