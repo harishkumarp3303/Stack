@@ -116,3 +116,20 @@ any built in classes or methods
 10. what is finalize method -> used for clean up activities
 11. System.out.println(1+2+3+"welcome"+5+6); -> 6welcome56
 12 Stringbuilder is not thread safe
+
+
+###
+
+1. String vs StringBuffer
+2. Thread Mehtods talk with each other->wait,notify,notifyAll
+3. what are starter dependencies in springboot
+4. how do you connect database to connect to database -> configuration of database paramaters like url,username & password
+5. Changes in Internal working of Hashmap in java 8 -> before java 8 linked list to store the data => java 8 it changed to red black tree.
+6. Changes in java 8 in garbage collection ->
+7. Default methods in java 8.
+8. why optional class is introduced in java8.
+9. Latest version of spring 3 how it is different from spring 2. -> supports java latest versions and supports cloud and microservices.
+10. How many types of scopes are there is spring. 5 types
+11. Design patterns -> Singleton- it ensures only one instance for database connectivity, Factory
+12. Solid principles-> s-class should have a single responsibilty o-classes should be open for extension and closed for modification.
+13.                     l-> Objects of superclass should be replacable by objects subclass. i-> interface aggregation d-> dependency injection
